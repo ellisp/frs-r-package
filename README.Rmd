@@ -4,8 +4,7 @@ R package for miscellaneous functions associated with Peter's Stats Stuff
 
 ## Modulus transformation
 Like a Box-Cox transformation, but it works with negative numbers too:
-
-```r
+```{r, fig.width = 7}
 eg_data <- data.frame(x = exp(rnorm(1000)) * 
                sample(c(-1, 1), 1000, replace = TRUE, prob = c(0.2, 0.8)))
 
@@ -17,9 +16,8 @@ p2 <- p1 +
                      trans = modulus_trans(0.1),
                      breaks = modulus_breaks(lambda = 0.1))
 gridExtra::grid.arrange(p1 + labs(x= "Original scale"), p2, ncol = 2)
+                 
 ```
-
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
                      
 See my blog posts on this:
 
@@ -30,8 +28,7 @@ See my blog posts on this:
 
 Yes, they're not as bad as you've been told!
 
-
-```r
+```{r, fig.width = 7}
 data(dairy)
 data(fonterra)
 # with defaults for positioning scales, but exemplifying custom colours, etc:
@@ -42,13 +39,7 @@ data(fonterra)
           col = c("#AA6800", "#7869CD"),
           colgrid = "grey90",
           main = "Fonterra share prices are less volatile than global milk prices")
-```
-
-```
-## The two series will be presented visually as though they had been converted to indexes.
-```
-
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
+``` 
 
 See my blog posts on this:
 
