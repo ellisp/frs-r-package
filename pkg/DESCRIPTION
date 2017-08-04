@@ -1,0 +1,10 @@
+Package: pssmisc
+Title: Miscellaneous Functions for Peter's Stats Stuff
+Version: 0.1.0
+Authors@R: person("Peter", "Ellis", email = "peter.ellis2013nz@gmail.com", role = c("aut", "cre"))
+Description: Miscellaneous functions for simulating, presenting and analysing data, associated with the Peter's Stats Stuff blog at https://ellisp.github.io.
+Depends: R (>= 3.3.1), scales, ggplot2
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
