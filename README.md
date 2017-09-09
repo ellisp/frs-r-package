@@ -19,7 +19,7 @@ p2 <- p1 +
 gridExtra::grid.arrange(p1 + labs(x= "Original scale"), p2, ncol = 2)
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png)
+![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png)
                      
 See my blog posts on this:
 
@@ -48,7 +48,7 @@ data(fonterra)
 ## The two series will be presented visually as though they had been converted to indexes.
 ```
 
-![plot of chunk unnamed-chunk-7](figure/unnamed-chunk-7-1.png)
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
 
 See my blog posts on this:
 
