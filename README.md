@@ -1,5 +1,5 @@
-# pssmisc-r-package
-R package for miscellaneous functions associated with Peter's Stats Stuff
+# frs-r-package
+R package for miscellaneous functions associated with the Free Range Statistics blog
 
 
 ## Modulus transformation
@@ -11,15 +11,30 @@ eg_data <- data.frame(x = exp(rnorm(1000)) *
 
 p1 <- ggplot(eg_data, aes(x = x)) +
   geom_density() 
+```
 
+```
+## Error in ggplot(eg_data, aes(x = x)): could not find function "ggplot"
+```
+
+```r
 p2 <- p1 +
   scale_x_continuous("Transformed scale",
                      trans = modulus_trans(0.1),
                      breaks = modulus_breaks(lambda = 0.1))
+```
+
+```
+## Error in eval(expr, envir, enclos): object 'p1' not found
+```
+
+```r
 gridExtra::grid.arrange(p1 + labs(x= "Original scale"), p2, ncol = 2)
 ```
 
-![plot of chunk unnamed-chunk-1](figure/unnamed-chunk-1-1.png)
+```
+## Error in arrangeGrob(...): object 'p1' not found
+```
                      
 See my blog posts on this:
 
@@ -33,7 +48,21 @@ Yes, they're not as bad as you've been told!
 
 ```r
 data(dairy)
+```
+
+```
+## Warning in data(dairy): data set 'dairy' not found
+```
+
+```r
 data(fonterra)
+```
+
+```
+## Warning in data(fonterra): data set 'fonterra' not found
+```
+
+```r
 # with defaults for positioning scales, but exemplifying custom colours, etc:
  dualplot(x1 = dairy$Date, y1 = dairy$WMP_Total, 
           x2 = fonterra$Date, y2 = fonterra$FCGClose,
@@ -45,10 +74,8 @@ data(fonterra)
 ```
 
 ```
-## The two series will be presented visually as though they had been converted to indexes.
+## Error in dualplot(x1 = dairy$Date, y1 = dairy$WMP_Total, x2 = fonterra$Date, : could not find function "dualplot"
 ```
-
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
 
 See my blog posts on this:
 
