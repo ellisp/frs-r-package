@@ -56,11 +56,11 @@ CREATE TABLE some_database.dbo.sql_executed_by_r_log
   log_event_code INT NOT NULL IDENTITY PRIMARY KEY, 
   start_time     DATETIME, 
   end_time       DATETIME,
-  sub_text       NVARCHAR(30),
+  sub_text       NVARCHAR(200),
   script_name    NVARCHAR(1000),
   batch_number   INT,
   result         NCHAR(30),
-  err_mess       NVARCHAR(8000),
+  err_mess       VARCHAR(8000),
   duration       NUMERIC(18, 2)
 );
 }
