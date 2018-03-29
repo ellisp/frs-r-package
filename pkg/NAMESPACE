@@ -3,6 +3,7 @@
 export(build_doc)
 export(dualplot)
 export(ifc_pal)
+export(letterize)
 export(modulus_breaks)
 export(modulus_trans)
 export(prettify)

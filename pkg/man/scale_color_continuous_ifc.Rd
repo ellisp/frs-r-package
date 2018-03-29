@@ -5,7 +5,7 @@
 \title{Continuous color scale for the IFC}
 \usage{
 scale_color_continuous_ifc(..., type = c("sequential", "diverging"),
-  first_col = 1, second_col = 6)
+  first_col = "red", second_col = "blue")
 }
 \description{
 Continuous color scale for the IFC

@@ -4,7 +4,7 @@
 \alias{scale_color_discrete_ifc}
 \title{Discrete color scale for the IFC}
 \usage{
-scale_color_discrete_ifc(..., sequence = c(1, 3, 2, 4:9))
+scale_color_discrete_ifc(..., sequence = c(4, 5, 9, 6, 7, 8))
 }
 \description{
 Discrete color scale for the IFC

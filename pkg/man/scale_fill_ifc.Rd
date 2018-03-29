@@ -4,7 +4,7 @@
 \alias{scale_fill_ifc}
 \title{Fill scale for the IFC}
 \usage{
-scale_fill_ifc(..., sequence = c(1, 3, 2, 4:9))
+scale_fill_ifc(..., sequence = c(4, 5, 9, 6, 7, 8))
 }
 \description{
 Fill scale for the IFC
