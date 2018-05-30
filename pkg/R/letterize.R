@@ -4,11 +4,13 @@
 #' 
 #' Convert levels of a factor or character to letters, for anonymisation
 #' 
-#' @param x
-#' @param method
-#' @param output
-#' @details
-#' @value
+#' @param x a factor or character
+#' @param method one of "random", "original" or "frequency" - how to allocate the letters a, b, and c, etc to
+#' the levels of x
+#' @param output whether the output should be the original class of x, or coerce to a character or factor
+#' @details for use in quick anonymising of data
+#' @return a vector of the same length as x, of class as specified by output, with levels of x replaced with 
+#' lower case letters
 #' @export
 #' 
 #' @examples

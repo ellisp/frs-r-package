@@ -6,6 +6,14 @@
 \usage{
 scale_color_discrete_ifc(..., sequence = c(4, 5, 9, 6, 7, 8))
 }
+\arguments{
+\item{...}{parameters to be passed to \code{scale_color_manual()}}
+
+\item{sequence}{sequence of colors from \code{ifc_pal} to use}
+}
 \description{
 Discrete color scale for the IFC
+}
+\seealso{
+\code{\link{ifc_pal}}
 }

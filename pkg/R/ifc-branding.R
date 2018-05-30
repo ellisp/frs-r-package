@@ -25,6 +25,7 @@ row.names(ifc_pal) <- ifc_pal$name
 #' 
 #' Make a colour paler by "tinting" it
 #' 
+#' @importFrom grDevices rgb
 #' @export
 #' @param col A vector of hex colors, or other format readable by grDevices::col2rgb
 #' @param x number from 0 to 1 for tint.  1 returns the original, and 0 is so pale as to be white
@@ -89,6 +90,10 @@ theme_ifc <- function(base_size= 12, base_family = "Arial"){
     }
 
 #' Fill scale for the IFC
+#' @import scales
+#' @param ... parameters to be passed to \code{scale_fill_manual()}
+#' @param sequence sequence of colors from \code{ifc_pal} to use
+#' @seealso \code{\link{ifc_pal}}
 #' @export
 scale_fill_ifc <- function(..., sequence = c(4, 5, 9, 6, 7, 8)){
   
@@ -98,6 +103,9 @@ scale_fill_ifc <- function(..., sequence = c(4, 5, 9, 6, 7, 8)){
 }
 
 #' Discrete color scale for the IFC
+#' @param ... parameters to be passed to \code{scale_color_manual()}
+#' @param sequence sequence of colors from \code{ifc_pal} to use
+#' @seealso \code{\link{ifc_pal}}
 #' @export
 scale_color_discrete_ifc <- function(..., sequence = c(4, 5, 9, 6, 7, 8)){
   
@@ -108,7 +116,13 @@ scale_color_discrete_ifc <- function(..., sequence = c(4, 5, 9, 6, 7, 8)){
 
 #' Continuous color scale for the IFC
 #' @export
+#' @param ... parameters to be passed to \code{scale_fill_manual()}
+#' @param type sequential (eg pale to dark) or diverging (eg color1, white, color2) scale
+#' @param first_col name of first color to use (using names of \code{ifc_pal})
+#' @param second_col name of second color to use (using names of \code{ifc_pal}).  Only needed if scale is diverging.
+#' @seealso \code{\link{ifc_pal}}
 #' @examples
+#' \dontrun{
 #' ggplot(mtcars, aes(x = vs, weight = mpg, fill = as.factor(cyl))) + 
 #'  geom_bar() + 
 #'  theme_ifc() +
@@ -121,7 +135,7 @@ scale_color_discrete_ifc <- function(..., sequence = c(4, 5, 9, 6, 7, 8)){
 #'  theme_ifc() +
 #'  ggtitle("CHART TITLE", "SUBTITLE") +
 #'  labs(caption = "Footer") +
-#'  scale_color_continuous_ifc("diverging", second_col = 9)
+#'  scale_color_continuous_ifc("diverging", second_col = 9)}
 scale_color_continuous_ifc <- function(..., type = c("sequential", "diverging"), 
                                        first_col = "red", second_col = "blue"){
   type <- match.arg(type, c("sequential", "diverging"))

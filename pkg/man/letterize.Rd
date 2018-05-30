@@ -7,8 +7,23 @@
 letterize(x, method = c("random", "original", "frequency"),
   output = c("original", "character", "factor"))
 }
+\arguments{
+\item{x}{a factor or character}
+
+\item{method}{one of "random", "original" or "frequency" - how to allocate the letters a, b, and c, etc to
+the levels of x}
+
+\item{output}{whether the output should be the original class of x, or coerce to a character or factor}
+}
+\value{
+a vector of the same length as x, of class as specified by output, with levels of x replaced with 
+lower case letters
+}
 \description{
 Convert levels of a factor or character to letters, for anonymisation
+}
+\details{
+for use in quick anonymising of data
 }
 \examples{
 x <- c("Peter", "John", "Mary", "Jane", "John")

@@ -7,10 +7,20 @@
 scale_color_continuous_ifc(..., type = c("sequential", "diverging"),
   first_col = "red", second_col = "blue")
 }
+\arguments{
+\item{...}{parameters to be passed to \code{scale_fill_manual()}}
+
+\item{type}{sequential (eg pale to dark) or diverging (eg color1, white, color2) scale}
+
+\item{first_col}{name of first color to use (using names of \code{ifc_pal})}
+
+\item{second_col}{name of second color to use (using names of \code{ifc_pal}).  Only needed if scale is diverging.}
+}
 \description{
 Continuous color scale for the IFC
 }
 \examples{
+\dontrun{
 ggplot(mtcars, aes(x = vs, weight = mpg, fill = as.factor(cyl))) + 
  geom_bar() + 
  theme_ifc() +
@@ -23,5 +33,8 @@ ggplot(mtcars, aes(x = disp, y = mpg, color = mpg)) +
  theme_ifc() +
  ggtitle("CHART TITLE", "SUBTITLE") +
  labs(caption = "Footer") +
- scale_color_continuous_ifc("diverging", second_col = 9)
+ scale_color_continuous_ifc("diverging", second_col = 9)}
+}
+\seealso{
+\code{\link{ifc_pal}}
 }
