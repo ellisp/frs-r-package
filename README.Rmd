@@ -1,10 +1,25 @@
 # frs-r-package
-R package for miscellaneous functions associated with the Free Range Statistics blog
+R package for miscellaneous functions associated with the [Free Range Statistics](http://freerangestats.info) blog
+
+```{r eval = FALSE}
+devtools::install_github("ellisp/frs-r-package/frs")
+```
+
+So far, the bits and pieces include:
+
+- dual axis plots
+- so-called "modulus" transformation for ggplot2 scales, which is like a Box Cox of the absolute value then with the sign returned.  Excellent for visualising economic variables that can be zero or negative
+- French death rates data in 2015
+- Colour palette and ggplot2 theme for International Finance Corporation branding (disclaimer - not associated at all with the IFC, but I did use it successfully in a report for them once)
+- turn levels of a factor into letters, useful for quick and dirty confidentialisation
+- some ODBC database odds and ends to help with R interacting with SQL Server
 
 
 ## Modulus transformation
 Like a Box-Cox transformation, but it works with negative numbers too:
 ```{r, fig.width = 7}
+library(ggplot2)
+library(frs)
 eg_data <- data.frame(x = exp(rnorm(1000)) * 
                sample(c(-1, 1), 1000, replace = TRUE, prob = c(0.2, 0.8)))
 
