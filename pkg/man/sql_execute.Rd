@@ -5,8 +5,8 @@
 \title{Execute SQL}
 \usage{
 sql_execute(channel, filename, sub_in = NULL, sub_out = NULL,
-  fixed = TRUE, error_action = "stop", log_table = NULL, verbose = TRUE,
-  ...)
+  fixed = TRUE, error_action = "stop", log_table = NULL,
+  verbose = TRUE, ...)
 }
 \arguments{
 \item{channel}{connection handle as returned by RODBC::odbcConnect() of class RODBC}

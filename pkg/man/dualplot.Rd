@@ -4,8 +4,8 @@
 \alias{dualplot}
 \title{Dual scale time series plot}
 \usage{
-dualplot(x1, y1, y2, x2 = x1, col = c("#C54E6D", "#009380"), lwd = c(1,
-  1), colgrid = NULL, mar = c(3, 6, 3, 6) + 0.1,
+dualplot(x1, y1, y2, x2 = x1, col = c("#C54E6D", "#009380"),
+  lwd = c(1, 1), colgrid = NULL, mar = c(3, 6, 3, 6) + 0.1,
   ylab1 = paste(substitute(y1), collapse = ""),
   ylab2 = paste(substitute(y2), collapse = ""), nxbreaks = 5,
   yleg1 = paste(gsub("\\n$", "", ylab1), "(left axis)"),
