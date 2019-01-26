@@ -19,13 +19,17 @@ datetime_ch <- function(dt){
 #' Execute T-SQL in a script, split into batches
 #' 
 #' @export
-#' @importFrom RODBC sqlQuery
+#' @importFrom DBI dbGetQuery
 #' @importFrom stringr str_split str_length 
 #' @details Reads a script of SQL, splits it into separate queries on the basis of any occurrences of \code{GO}
 #' in the script, and passes it to the database server for execution.  While the initial use case was for SQL Server, there's no
 #' reason why it wouldn't work with other ODBC connections.
 #' 
 #' The case of \code{GO} is ignored but it has to be the first non-space word on its line of code.
+#' 
+#' This won't work with SQL scripts that create of temporary tables eg \code{#my_temp_table}; I'm not sure why.
+#' The workaround is to give such tables explicit persistent names eg \code{dbo.my_temp_table} and remember to
+#' clean them up at the end.
 #' 
 #' If any batch at any point returns rows of data (eg via a \code{SELECT} statement that does not \code{INSERT} the
 #' results into another table or variable on the database), the rest of that batch is not executed.  
@@ -44,7 +48,9 @@ datetime_ch <- function(dt){
 #'   batch_number   INT,
 #'   result         NCHAR(30),
 #'   err_mess       VARCHAR(8000),
-#'   duration       NUMERIC(18, 2)
+#'   duration       NUMERIC(18, 2),
+#'   sub_out        NVARCHAR(255),
+#'   ruser          NVARCHAR(255),
 #' );
 #' }
 #' 
@@ -60,19 +66,25 @@ datetime_ch <- function(dt){
 #' to "stop" means we just keep ploughing on, which may or may not be a bad idea.  Use "stop" unless you know that failure
 #' in one part of a script isn't fatal.
 #' @param log_table table in the database to record a log of what happened.  Set to NULL if no log table available.  The log_table
-#' needs to have (at least) the following columns: event_time, sub_out, script_name, batch_number, result, err_mess and duration. 
+#' needs to have (at least) the following columns: event_time, sub_out, script_name, batch_number, result, err_mess, duration and ruser. 
 #' See Details for example SQL to create such a log table.
 #' @param verbose Logical, gives some control over messages
 #' @param ... other arguments to be passed to \code{sqlQuery()}, such as \code{stringsAsFactors = FALSE}.
 #' @examples
 #' \dontrun{
-#' ch <- odbcConnect("some_dsn")
-#' sql_execute(ch, "some_file.sql", log_table = "some_database.dbo.sql_executed_by_r_log")
+#' ch <- dbConnect(odbc(), "some_dsn_name", database = "some_database")
+#' sql_execute(ch, "some_file.sql")
 #' }
 #' @author Peter Ellis
 sql_execute <- function(channel, filename, sub_in = NULL, sub_out = NULL, fixed = TRUE, 
-                        error_action = "stop", log_table = NULL, 
-                        verbose = TRUE, ...){
+                        error_action = "stop", log_table = 'dbo.sql_executed_by_r_log', 
+                        verbose = FALSE, ...){
+  
+  check <- try( DBI::dbGetQuery(channel, "select 1"), silent = TRUE)
+  if(class(check) == "try-error"){
+    stop("Channel seems to be dead. Maybe re-create it with odbcConnect")
+  }
+  
   
   # we can't tell in advance what encoding the .sql files are in, so we read it in
   # in two ways (one of which is certain to return gibberish) and choose the version that is recognised as a proper string:
@@ -95,6 +107,12 @@ sql_execute <- function(channel, filename, sub_in = NULL, sub_out = NULL, fixed 
       sql <- sql2
     }
   })
+  
+  # Strip out comment blocks
+  sql <- gsub("\\/\\*.*?\\*\\/", "", sql)
+  
+  # Strip out trailing GO
+  sql <- gsub("[Gg][Oo] *?$", "", sql)
   
   # do the find and replace that are needed
   if(!is.null(sub_in)){
@@ -123,7 +141,7 @@ sql_execute <- function(channel, filename, sub_in = NULL, sub_out = NULL, fixed 
     
     if(verbose){message(paste("Executing batch", i, "of", n_batches))}
     
-    duration <- system.time({res <- sqlQuery(channel, sql_split[[i]], ...)})
+    duration <- system.time({res <- DBI::dbGetQuery(channel, sql_split[[i]])})
     log_entry$duration <- duration[3]
     
     if(class(res) == "data.frame"){
@@ -152,12 +170,12 @@ sql_execute <- function(channel, filename, sub_in = NULL, sub_out = NULL, fixed 
       sql <- with(log_entry, paste0("INSERT INTO ", 
                                     log_table, 
                                     "(start_time, end_time, sub_out, script_name, batch_number, 
-                                    result, err_mess, duration)",
+                                    result, err_mess, duration, ruser)",
                                     " VALUES (", start_time, ", ", end_time, ", '", 
                                     sub_out, "', '", script_name, "', ", batch_number, ", '", result, "', '",
-                                    err_mess, "', ", duration, ");"))
+                                    err_mess, "', ", duration, ", '", as.character(Sys.info()["user"]), "');"))
       
-      log_res <- sqlQuery(channel, sql)
+      log_res <- dbGetQuery(channel, sql)
       
       
     }
@@ -166,9 +184,11 @@ sql_execute <- function(channel, filename, sub_in = NULL, sub_out = NULL, fixed 
     }
     if(class(res) == "data.frame"){
       if(i == n_batches){
-        return(res)  
+        return(res)
       } else {
-        warning("Downloaded a data frame from batch ", i, " of SQL, which wasn't the \nlast batch in the file.  This data frame is not kept.")
+        if(verbose){
+          warning("Downloaded a data frame from batch ", i, " of SQL, which wasn't the \nlast batch in the file.  This data frame is not kept.")
+        }
       }
       
     }

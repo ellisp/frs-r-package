@@ -25,3 +25,6 @@ updated frequently)
 \seealso{
 \code{\link[utils]{download.file}}
 }
+\author{
+Peter Ellis
+}

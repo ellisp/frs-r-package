@@ -5,8 +5,8 @@
 \title{Execute SQL}
 \usage{
 sql_execute(channel, filename, sub_in = NULL, sub_out = NULL,
-  fixed = TRUE, error_action = "stop", log_table = NULL,
-  verbose = TRUE, ...)
+  fixed = TRUE, error_action = "stop",
+  log_table = "dbo.sql_executed_by_r_log", verbose = FALSE, ...)
 }
 \arguments{
 \item{channel}{connection handle as returned by RODBC::odbcConnect() of class RODBC}
@@ -27,7 +27,7 @@ to "stop" means we just keep ploughing on, which may or may not be a bad idea.  
 in one part of a script isn't fatal.}
 
 \item{log_table}{table in the database to record a log of what happened.  Set to NULL if no log table available.  The log_table
-needs to have (at least) the following columns: event_time, sub_out, script_name, batch_number, result, err_mess and duration. 
+needs to have (at least) the following columns: event_time, sub_out, script_name, batch_number, result, err_mess, duration and ruser. 
 See Details for example SQL to create such a log table.}
 
 \item{verbose}{Logical, gives some control over messages}
@@ -43,6 +43,10 @@ in the script, and passes it to the database server for execution.  While the in
 reason why it wouldn't work with other ODBC connections.
 
 The case of \code{GO} is ignored but it has to be the first non-space word on its line of code.
+
+This won't work with SQL scripts that create of temporary tables eg \code{#my_temp_table}; I'm not sure why.
+The workaround is to give such tables explicit persistent names eg \code{dbo.my_temp_table} and remember to
+clean them up at the end.
 
 If any batch at any point returns rows of data (eg via a \code{SELECT} statement that does not \code{INSERT} the
 results into another table or variable on the database), the rest of that batch is not executed.  
@@ -61,14 +65,16 @@ CREATE TABLE some_database.dbo.sql_executed_by_r_log
   batch_number   INT,
   result         NCHAR(30),
   err_mess       VARCHAR(8000),
-  duration       NUMERIC(18, 2)
+  duration       NUMERIC(18, 2),
+  sub_out        NVARCHAR(255),
+  ruser          NVARCHAR(255),
 );
 }
 }
 \examples{
 \dontrun{
-ch <- odbcConnect("some_dsn")
-sql_execute(ch, "some_file.sql", log_table = "some_database.dbo.sql_executed_by_r_log")
+ch <- dbConnect(odbc(), "some_dsn_name", database = "some_database")
+sql_execute(ch, "some_file.sql")
 }
 }
 \author{

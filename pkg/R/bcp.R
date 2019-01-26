@@ -9,6 +9,7 @@
 #' @param user user name if needed to write to the server
 #' @param pwd password if needed to write to the server
 #' @param verbose whether to print out the commands sent to the command line
+#' @author Peter Ellis
 #' @export
 #' @details This is a convenience wrapper for the \code{bcp} function for bulk upload to SQL Server.
 #' 

@@ -13,6 +13,7 @@ So far, the bits and pieces include:
 - French death rates data in 2015
 - Colour palette and ggplot2 theme for International Finance Corporation branding (disclaimer - not associated at all with the IFC, but I did use it successfully in a report for them once)
 - turn levels of a factor into letters, useful for quick and dirty confidentialisation
+- utility to download files only if fresh
 - some ODBC database odds and ends to help with R interacting with SQL Server
 
 
@@ -22,36 +23,6 @@ Like a Box-Cox transformation, but it works with negative numbers too:
 ```r
 library(ggplot2)
 library(frs)
-```
-
-```
-## Loading required package: scales
-```
-
-```
-## Loading required package: rmarkdown
-```
-
-```
-## Loading required package: stringr
-```
-
-```
-## Loading required package: RODBC
-```
-
-```
-## 
-## Attaching package: 'frs'
-```
-
-```
-## The following object is masked from 'package:scales':
-## 
-##     modulus_trans
-```
-
-```r
 eg_data <- data.frame(x = exp(rnorm(1000)) * 
                sample(c(-1, 1), 1000, replace = TRUE, prob = c(0.2, 0.8)))
 

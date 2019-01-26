@@ -40,3 +40,6 @@ as the fastest way to write your data to a pipe-delimited text file with no colu
 If the columns in the file you have saved don't match those in the table, this operation will fail,
 possibly with an error, possibly silently. So take care.
 }
+\author{
+Peter Ellis
+}
