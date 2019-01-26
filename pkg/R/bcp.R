@@ -9,6 +9,7 @@
 #' @param user user name if needed to write to the server
 #' @param pwd password if needed to write to the server
 #' @param verbose whether to print out the commands sent to the command line
+#' @export
 #' @details This is a convenience wrapper for the \code{bcp} function for bulk upload to SQL Server.
 #' 
 #' Never type your password into a script; use \code{rstudioapi::askForPassword("Database password")} 
