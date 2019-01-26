@@ -3,7 +3,7 @@ R package for miscellaneous functions associated with the [Free Range Statistics
 
 
 ```r
-devtools::install_github("ellisp/frs-r-package/frs")
+devtools::install_github("ellisp/frs-r-package/pkg")
 ```
 
 So far, the bits and pieces include:
