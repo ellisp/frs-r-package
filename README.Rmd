@@ -12,6 +12,7 @@ So far, the bits and pieces include:
 - French death rates data in 2015
 - Colour palette and ggplot2 theme for International Finance Corporation branding (disclaimer - not associated at all with the IFC, but I did use it successfully in a report for them once)
 - turn levels of a factor into letters, useful for quick and dirty confidentialisation
+- utility to download files only if fresh
 - some ODBC database odds and ends to help with R interacting with SQL Server
 
 

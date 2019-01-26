@@ -2,6 +2,7 @@
 
 export(bcp)
 export(build_doc)
+export(download_if_fresh)
 export(dualplot)
 export(french_death_rates_2015)
 export(ifc_pal)
@@ -26,3 +27,4 @@ importFrom(grDevices,rgb)
 importFrom(stats,approx)
 importFrom(stringr,str_length)
 importFrom(stringr,str_split)
+importFrom(utils,download.file)
