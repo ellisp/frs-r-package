@@ -5,7 +5,9 @@
 #' @param recursive whether or not to run all scripts in sub-folders as well as in the path
 #' @param verbose whether or not to print to the screen the name of each script as run
 #' @param push_through whether to push through to the next script if an error is found (otherwise will stop)
-#' @param cleanup whether to remove all objects from the global environemnt other than those designated as keepers
+#' @param cleanup whether to remove all objects from the global environment other than those designated as keepers.
+#' If there is an object called \code{keepers} in the global environment, then any objects named in \code{keepers}
+#' will not be removed at the end of running each script.
 #' @param suppress_messages whether messages should be suppressed or not. Sometimes messages can be overwhelming.
 #' @author Peter Ellis
 #' @export

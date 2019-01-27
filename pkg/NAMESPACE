@@ -2,6 +2,7 @@
 
 export(bcp)
 export(build_doc)
+export(cleanup)
 export(download_if_fresh)
 export(dualplot)
 export(french_death_rates_2015)

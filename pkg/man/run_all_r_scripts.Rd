@@ -16,7 +16,9 @@ run_all_r_scripts(path, recursive = TRUE, verbose = TRUE,
 
 \item{push_through}{whether to push through to the next script if an error is found (otherwise will stop)}
 
-\item{cleanup}{whether to remove all objects from the global environemnt other than those designated as keepers}
+\item{cleanup}{whether to remove all objects from the global environment other than those designated as keepers.
+If there is an object called \code{keepers} in the global environment, then any objects named in \code{keepers}
+will not be removed at the end of running each script.}
 
 \item{suppress_messages}{whether messages should be suppressed or not. Sometimes messages can be overwhelming.}
 }
