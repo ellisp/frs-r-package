@@ -57,11 +57,11 @@ bcp <- function(server, database, schema, table, file, user = NULL, pwd = NULL, 
   }  
   
   if(verbose){print(ff)}
-  system(ff)
+  system(ff, show.output.on.console = verbose)
   
   
   if(verbose){print(cmd)}
-  system(cmd)
+  system(cmd, show.output.on.console = verbose)
   
   unlink(ff_file)
 }
