@@ -1,11 +1,12 @@
-# Helper function to convert the output of Sys.time() into a character string
-# without the time zone on it
-# 
-# @details Not exported.
-# @keywords internal
-# @param dt an object of class \code{POSIXCT}
-# @examples
-# datetime_ch(Sys.time())
+#' Helper function to convert the output of Sys.time() into a character string
+#' without the time zone on it
+#' 
+#' @details Not exported.
+#' @keywords internal
+#' @param dt an object of class \code{POSIXCT}
+#' @export
+#' @examples
+#' datetime_ch(Sys.time())
 datetime_ch <- function(dt){
   dt <- gsub(" [A-Z]*$", "", as.character(dt))
   dt <- paste0("CAST ('", dt, "' AS DATETIME)")
