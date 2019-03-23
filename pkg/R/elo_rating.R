@@ -36,7 +36,7 @@ elo_prob <- function(a, b, ml){
 #' round(elo_rating(a = 1500, b = 1925, ml = 7, axp = 0, bxp = 10000, winner = "a")$a, 2)
 #' @author Peter Ellis
 elo_rating <- function(a, b, winner = c("a", "b"), ml = 1, axp = 500, bxp = 500){
-  winner <- tolower(winner)
+  winner <- match.arg(winner)
   
   
   # calculate experience-correction multipliers:
