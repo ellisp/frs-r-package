@@ -5,7 +5,7 @@
 \title{Determine Elo rating of two players given one has won a match}
 \usage{
 elo_rating(a, b, winner = c("a", "b"), ml = 1, axp = 500,
-  bxp = 500)
+  bxp = 500, a_adv = 0)
 }
 \arguments{
 \item{a}{Elo rating of player a before match}
@@ -19,6 +19,9 @@ elo_rating(a, b, winner = c("a", "b"), ml = 1, axp = 500,
 \item{axp}{total match lengths (experience) of player a until this match}
 
 \item{bxp}{total match lengths (experience) of player b until this match}
+
+\item{a_adv}{any arbitrary advantage that player a gets on top of the usual comparison of ratings,
+for example from home town advantage}
 }
 \description{
 Determine Elo rating of two players given one has won a match
@@ -29,6 +32,9 @@ See http://www.fibs.com/ratings.html for formulae
 \examples{
 # baptism by fire; a's rating should be 1540.95 after beating a master player:
 round(elo_rating(a = 1500, b = 1925, ml = 7, axp = 0, bxp = 10000, winner = "a")$a, 2)
+
+# short game where b has a home town advantage of 0.1
+elo_rating(1500, 1500, a_adv = -0.1)
 }
 \author{
 Peter Ellis

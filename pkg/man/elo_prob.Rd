@@ -4,7 +4,7 @@
 \alias{elo_prob}
 \title{Determine the expected probability of player a winning a match, given Elo ratings}
 \usage{
-elo_prob(a, b, ml)
+elo_prob(a, b, ml, a_adv = 0)
 }
 \arguments{
 \item{a}{Elo rating of player a}
@@ -12,6 +12,9 @@ elo_prob(a, b, ml)
 \item{b}{Elo rating of player b}
 
 \item{ml}{length of match (if a backgammon game, the minimum winning score)}
+
+\item{a_adv}{any arbitrary advantage that player a gets on top of the usual comparison of ratings,
+for example from home town advantage}
 }
 \description{
 Determine the expected probability of player a winning a match, given Elo ratings
@@ -22,4 +25,7 @@ elo_prob(1500, 1500, 1)
 
 # 87\% chance of winning a match to 17 if you're a backgammon expert v average player:
 elo_prob(1900, 1500, 17)
+
+# if you have a home town advantage of 10\% but are otherwise equal:
+elo_prob(1700, 1700, 31, 0.1)
 }
