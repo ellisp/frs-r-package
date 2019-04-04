@@ -6,7 +6,9 @@
 #' @param b Elo rating of player b
 #' @param ml length of match (if a backgammon game, the minimum winning score)
 #' @param a_adv any arbitrary advantage that player a gets on top of the usual comparison of ratings,
-#' for example from home town advantage
+#' for example from home town advantage. Negative for a disadvantage.
+#' @param b_adv any arbitrary advantage that player b gets on top of the usual comparison of ratings,
+#' for example from home town advantage. Negative for a disadvantage
 #' @export
 #' @examples 
 #' # 50% chance of winning if both players have equal ratings:
@@ -15,12 +17,13 @@
 #' # 87% chance of winning a match to 17 if you're a backgammon expert v average player:
 #' elo_prob(1900, 1500, 17)
 #' 
-#' # if you have a home town advantage of 10% but are otherwise equal:
-#' elo_prob(1700, 1700, 31, 0.1)
-elo_prob <- function(a, b, ml, a_adv = 0){
+#' # if you have a home town advantage of 10% and they have an away disadvantage of 5%
+#' # but are otherwise equal:
+#' elo_prob(1700, 1700, 31, a_adv = 0.1, b_adv = -0.05)
+elo_prob <- function(a, b, ml, a_adv = 0, b_adv = 0){
   # 
   # against player b of length ml, with a and b representing their FIBS Elo ratings
-  tmp <- pmin(1 - (1 / (10 ^ ((a - b) * sqrt(ml) / 2000) + 1)) + a_adv, 1)
+  tmp <- pmax(pmin(1 - (1 / (10 ^ ((a - b) * sqrt(ml) / 2000) + 1)) + a_adv - b_adv, 1), 0)
   return(tmp)
 }   
 
@@ -45,16 +48,18 @@ elo_prob <- function(a, b, ml, a_adv = 0){
 #' # short game where b has a home town advantage of 0.1
 #' elo_rating(1500, 1500, a_adv = -0.1)
 #' @author Peter Ellis
-elo_rating <- function(a, b, winner = c("a", "b"), ml = 1, axp = 500, bxp = 500, a_adv = 0){
+elo_rating <- function(a, b, winner = c("a", "b"), ml = 1, axp = 500, bxp = 500, 
+                       a_adv = 0, b_adv = 0){
   winner <- match.arg(winner)
   
   
-  # calculate experience-correction multipliers:
+  # calculate experience-correction multipliers, which make the Elo rating
+  # adjust faster for less experienced players:
   multa <- ifelse(axp < 400, 5 - ((axp + ml) / 100), 1)
   multb <- ifelse(bxp < 400, 5 - ((axp + ml) / 100), 1)
   
   # probability of A winning, using elo_prob:
-  winproba <- elo_prob(a = a, b = b, ml = ml, a_adv = a_adv)
+  winproba <- elo_prob(a = a, b = b, ml = ml, a_adv = a_adv, b_adv = b_adv)
   
   # match value (points to be distributed between the two players):
   matchvalue <- 4 * sqrt(ml)
@@ -68,6 +73,6 @@ elo_rating <- function(a, b, winner = c("a", "b"), ml = 1, axp = 500, bxp = 500,
     b <- b - matchvalue * (1- winproba) * multb
   }
   
-  return(list(a = a, b = b, axp = axp + ml, bxp = bxp + ml))
+  return(list(a = a, b = b, axp = axp + ml, bxp = bxp + ml, winproba = winproba))
 }
 
