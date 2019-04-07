@@ -7,3 +7,5 @@ document("pkg")
 run_examples("pkg")
 check("pkg")
 build("pkg")
+
+unlink("test.svg")

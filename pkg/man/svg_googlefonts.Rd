@@ -17,6 +17,10 @@ svg_googlefonts(svgfile, googlefonts = c("Roboto", "Sarala"),
 \description{
 Add Google webfonts to the style definition of an SVG file
 }
+\details{
+This is a very quick hack put together for my purposes, I don't know how generally well 
+it will work.
+}
 \examples{
 \dontrun{
 library(svglite)
@@ -27,4 +31,7 @@ text(10:1, 1:10, LETTERS[1:10])
 dev.off()
 svg_googlefonts("test.svg", "Indie Flower")
 }
+}
+\author{
+Peter Ellis
 }

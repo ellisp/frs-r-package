@@ -6,6 +6,9 @@
 #' @param svgfile path to an SVG
 #' @param googlefonts Google Web fonts to be added
 #' @param new_svgfile path to a new SVG file to create. By default will overwrite \code{svgfile}.
+#' @author Peter Ellis
+#' @details This is a very quick hack put together for my purposes, I don't know how generally well 
+#' it will work.
 #' @examples 
 #' \dontrun{
 #' library(svglite)
