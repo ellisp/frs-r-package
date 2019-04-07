@@ -9,6 +9,7 @@
 #' @author Peter Ellis
 #' @details This is a very quick hack put together for my purposes, I don't know how generally well 
 #' it will work.
+#' @export
 #' @examples 
 #' \dontrun{
 #' library(svglite)
