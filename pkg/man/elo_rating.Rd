@@ -5,7 +5,7 @@
 \title{Determine Elo rating of two players given one has won a match}
 \usage{
 elo_rating(a, b, winner = c("a", "b"), ml = 1, axp = 500,
-  bxp = 500, a_adv = 0)
+  bxp = 500, a_adv = 0, b_adv = 0)
 }
 \arguments{
 \item{a}{Elo rating of player a before match}
