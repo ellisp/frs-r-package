@@ -5,6 +5,9 @@ knit("README.Rmd")
 
 document("pkg")
 run_examples("pkg")
+
+sapply(c("p1.png", "p1.svg", "p2.png", "p2.svg", "p3.svg", "p3.png"), unlink)
+
 check("pkg")
 build("pkg")
 
