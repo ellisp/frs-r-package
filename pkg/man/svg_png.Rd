@@ -40,7 +40,7 @@ svg_png(p2, "p2")
 if(require(lattice)){
   Depth <- equal.count(quakes$depth, number=8, overlap=.1)
   p3 <- xyplot(lat ~ long | Depth, data = quakes)
-  svg_png("p3", p3)
+  svg_png(p3, "p3")
   }
 
 }

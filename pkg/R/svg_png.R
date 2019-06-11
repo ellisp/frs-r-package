@@ -26,7 +26,7 @@
 #' if(require(lattice)){
 #'   Depth <- equal.count(quakes$depth, number=8, overlap=.1)
 #'   p3 <- xyplot(lat ~ long | Depth, data = quakes)
-#'   svg_png("p3", p3)
+#'   svg_png(p3, "p3")
 #'   }
 #' 
 svg_png <- function(p, file, w = 8, h = 5, res = 600, googlefonts = c("Roboto", "Sarala")){
