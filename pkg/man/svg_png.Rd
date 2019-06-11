@@ -4,13 +4,13 @@
 \alias{svg_png}
 \title{Draw a graphic as both an SVG and a PNG}
 \usage{
-svg_png(file, p, w = 8, h = 5, res = 600, googlefonts = c("Roboto",
+svg_png(p, file, w = 8, h = 5, res = 600, googlefonts = c("Roboto",
   "Sarala"))
 }
 \arguments{
-\item{file}{stub of filename under which to save the graphic. .svg and .png will be added automatically.}
-
 \item{p}{ggplot2 object to draw, or base plot as a function}
+
+\item{file}{stub of filename under which to save the graphic. .svg and .png will be added automatically.}
 
 \item{w}{width in inches}
 
@@ -31,11 +31,11 @@ quality SVG and an identical (hopefully) high quality PNG
 \examples{
 if(require(ggplot2)){
   p1 <- ggplot(mtcars, aes(x = disp, y = mpg)) + geom_point()
-  svg_png("p1", p1)
+  svg_png(p1, "p1")
   }
 
 p2 <- function(){plot(1:10, 1:10)}
-svg_png("p2", p2)
+svg_png(p2, "p2")
 
 if(require(lattice)){
   Depth <- equal.count(quakes$depth, number=8, overlap=.1)

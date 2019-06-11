@@ -1,6 +1,6 @@
 Package: frs
 Title: Miscellaneous Functions for Free Range Statistics
-Version: 0.6.0.9000
+Version: 0.6.1
 Authors@R: person("Peter", "Ellis", email = "peter.ellis2013nz@gmail.com", role = c("aut", "cre"))
 Description: Miscellaneous functions for simulating, presenting and analysing data, associated with the Peter's Stats Stuff blog at https://ellisp.github.io.
 Depends: R (>= 3.4.0), scales, ggplot2, rmarkdown

@@ -17,11 +17,11 @@
 #' @examples 
 #' if(require(ggplot2)){
 #'   p1 <- ggplot(mtcars, aes(x = disp, y = mpg)) + geom_point()
-#'   svg_png("p1", p1)
+#'   svg_png(p1, "p1")
 #'   }
 #' 
 #' p2 <- function(){plot(1:10, 1:10)}
-#' svg_png("p2", p2)
+#' svg_png(p2, "p2")
 #' 
 #' if(require(lattice)){
 #'   Depth <- equal.count(quakes$depth, number=8, overlap=.1)
@@ -29,7 +29,7 @@
 #'   svg_png("p3", p3)
 #'   }
 #' 
-svg_png <- function(file, p, w = 8, h = 5, res = 600, googlefonts = c("Roboto", "Sarala")){
+svg_png <- function(p, file, w = 8, h = 5, res = 600, googlefonts = c("Roboto", "Sarala")){
   
   plot_drawer <- function(){
     if("ggplot" %in% class(p) |
