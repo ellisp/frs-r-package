@@ -1,0 +1,6 @@
+library(nousutils)
+library(DBI)
+dawn <- connect_dawn()
+anzsic_4_abs <- dbGetQuery(dawn, "select * from common.d_anzsic_4_abs")
+View(anzsic_4_abs)
+save(anzsic_4_abs, file = "pkg/data/anzsic_4_abs.rda")

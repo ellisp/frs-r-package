@@ -20,3 +20,14 @@ NULL
 #' @format A data frame with 170 rows and 2 variables.
 #' @source Global Dairy Trade database via Qandl
 NULL
+
+#' Australian New Zealand Standard Industry Classification
+#'
+#' Price index of whole milk powder from July 2008 to August 2016.  Sometimes monthly, sometimes fortnightly.
+#'
+#' @rdname anzsic_4_abs
+#' @name anzsic_4_abs
+#' @docType data
+#' @format A data frame with 502 rows and 12 variables.
+#' @source ABS, courtesy of the Nous Group data warehouse
+NULL
