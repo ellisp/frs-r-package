@@ -28,6 +28,6 @@ NULL
 #' @rdname anzsic_4_abs
 #' @name anzsic_4_abs
 #' @docType data
-#' @format A data frame with 502 rows and 12 variables.
+#' @format A data frame with 506 rows and 8 variables.
 #' @source ABS, courtesy of the Nous Group data warehouse
 NULL

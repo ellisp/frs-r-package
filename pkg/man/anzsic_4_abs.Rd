@@ -4,7 +4,7 @@
 \name{anzsic_4_abs}
 \alias{anzsic_4_abs}
 \title{Australian New Zealand Standard Industry Classification}
-\format{A data frame with 502 rows and 12 variables.}
+\format{A data frame with 506 rows and 8 variables.}
 \source{
 ABS, courtesy of the Nous Group data warehouse
 }
