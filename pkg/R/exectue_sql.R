@@ -74,10 +74,10 @@ datetime_ch <- function(dt){
 #' @examples
 #' \dontrun{
 #' ch <- dbConnect(odbc(), "some_dsn_name", database = "some_database")
-#' sql_execute(ch, "some_file.sql")
+#' execute_sql(ch, "some_file.sql")
 #' }
 #' @author Peter Ellis
-sql_execute <- function(channel, filename, sub_in = NULL, sub_out = NULL, fixed = TRUE, 
+execute_sql <- function(channel, filename, sub_in = NULL, sub_out = NULL, fixed = TRUE, 
                         error_action = "stop", log_table = 'dbo.sql_executed_by_r_log', 
                         verbose = FALSE, ...){
   
