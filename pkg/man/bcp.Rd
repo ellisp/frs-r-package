@@ -5,7 +5,7 @@
 \title{bulk upload of a pipe delimited text file to an existing table in a SQL Survey database}
 \usage{
 bcp(server, database, schema, table, file, user = NULL, pwd = NULL,
-  verbose = FALSE)
+  verbose = FALSE, extra_args = " -b 1000000")
 }
 \arguments{
 \item{server}{address of a SQL Server server eg 'localhost' or a URL}
@@ -23,6 +23,8 @@ bcp(server, database, schema, table, file, user = NULL, pwd = NULL,
 \item{pwd}{password if needed to write to the server}
 
 \item{verbose}{whether to print out the commands sent to the command line}
+
+\item{extra_args}{extra arguments to pass through to the \code{bcp} utility}
 }
 \description{
 bulk upload of a pipe delimited text file to an existing table in a SQL Survey database

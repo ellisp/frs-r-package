@@ -9,6 +9,7 @@
 #' @param user user name if needed to write to the server
 #' @param pwd password if needed to write to the server
 #' @param verbose whether to print out the commands sent to the command line
+#' @param extra_args extra arguments to pass through to the \code{bcp} utility
 #' @author Peter Ellis
 #' @export
 #' @details This is a convenience wrapper for the \code{bcp} function for bulk upload to SQL Server.
@@ -22,9 +23,11 @@
 #' 
 #' If the columns in the file you have saved don't match those in the table, this operation will fail,
 #' possibly with an error, possibly silently. So take care.
-bcp <- function(server, database, schema, table, file, user = NULL, pwd = NULL, verbose = FALSE){
+bcp <- function(server, database, schema, table, file, user = NULL, pwd = NULL, verbose = FALSE,
+                extra_args = " -b 1000000"){
   
   ff_file <- tempfile()
+  extra_args <- paste0(" ", stringr::str_squish(extra_args))
   
   # Write a format file
   if(server == "localhost"){
@@ -32,13 +35,13 @@ bcp <- function(server, database, schema, table, file, user = NULL, pwd = NULL, 
                   database, '].[', schema, '].[', table, 
                   '] format nul -c -x -f ', 
                  ff_file, 
-                 ' -t | -T')
+                 ' -t | -T', extra_args)
     cmd <- paste0('bcp [', 
                   database, '].[', schema, '].[', table, 
                   '] in ', 
                   file, ' -f ',
                   ff_file, 
-                  ' -T')
+                  ' -T', extra_args)
     
   } else {
     ff <- paste0('bcp [', 
@@ -46,14 +49,14 @@ bcp <- function(server, database, schema, table, file, user = NULL, pwd = NULL, 
                  '] format nul -c -x -f ', 
                  ff_file, 
                  ' -t | -S nous-pssa01.database.windows.net -U ',
-                 user, ' -P ', pwd)
+                 user, ' -P ', pwd, extra_args)
     cmd <- paste0('bcp [', 
                   database, '].[', schema, '].[', table, 
                   '] in ', 
                   file, ' -f ',
                   ff_file, 
                   '  -S nous-pssa01.database.windows.net -U ',
-                  user, ' -P ', pwd)
+                  user, ' -P ', pwd, extra_args)
   }  
   
   if(verbose){print(ff)}
