@@ -10,6 +10,7 @@
 #' @param pwd password if needed to write to the server
 #' @param verbose whether to print out the commands sent to the command line
 #' @param extra_args extra arguments to pass through to the \code{bcp} utility
+#' @param delim delimiter in the text file we are uploading
 #' @author Peter Ellis
 #' @export
 #' @details This is a convenience wrapper for the \code{bcp} function for bulk upload to SQL Server.
@@ -24,7 +25,7 @@
 #' If the columns in the file you have saved don't match those in the table, this operation will fail,
 #' possibly with an error, possibly silently. So take care.
 bcp <- function(server, database, schema, table, file, user = NULL, pwd = NULL, verbose = FALSE,
-                extra_args = " -b 1000000"){
+                extra_args = " -b 1000000", delim = "|"){
   
   ff_file <- tempfile()
   extra_args <- paste0(" ", stringr::str_squish(extra_args))
@@ -58,6 +59,8 @@ bcp <- function(server, database, schema, table, file, user = NULL, pwd = NULL, 
                   '  -S nous-pssa01.database.windows.net -U ',
                   user, ' -P ', pwd, extra_args)
   }  
+  
+  ff <- gsub("|", delim, ff, fixed = TRUE)
   
   if(verbose){print(ff)}
   system(ff, show.output.on.console = verbose)
