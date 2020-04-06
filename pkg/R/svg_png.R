@@ -50,7 +50,7 @@ svg_png <- function(p, file, w = 8, h = 5, res = 600, googlefonts = c("Roboto", 
     plot_drawer()
     grDevices::dev.off()
   
-  svg_googlefonts(svgfile)
+  svg_googlefonts(svgfile, googlefonts = googlefonts)
   
   Cairo::CairoPNG(paste0(file, ".png"),
            width = w * res,
