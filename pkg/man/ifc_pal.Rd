@@ -4,7 +4,9 @@
 \name{ifc_pal}
 \alias{ifc_pal}
 \title{IFC palette}
-\format{An object of class \code{data.frame} with 9 rows and 7 columns.}
+\format{
+An object of class \code{data.frame} with 9 rows and 7 columns.
+}
 \usage{
 ifc_pal
 }

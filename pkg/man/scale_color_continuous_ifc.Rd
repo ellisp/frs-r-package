@@ -4,8 +4,12 @@
 \alias{scale_color_continuous_ifc}
 \title{Continuous color scale for the IFC}
 \usage{
-scale_color_continuous_ifc(..., type = c("sequential", "diverging"),
-  first_col = "red", second_col = "blue")
+scale_color_continuous_ifc(
+  ...,
+  type = c("sequential", "diverging"),
+  first_col = "red",
+  second_col = "blue"
+)
 }
 \arguments{
 \item{...}{parameters to be passed to \code{scale_fill_manual()}}

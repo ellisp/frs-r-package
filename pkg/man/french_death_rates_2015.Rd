@@ -4,7 +4,9 @@
 \name{french_death_rates_2015}
 \alias{french_death_rates_2015}
 \title{French death rates 2015}
-\format{An object of class \code{data.frame} with 19 rows and 3 columns.}
+\format{
+An object of class \code{data.frame} with 19 rows and 3 columns.
+}
 \source{
 https://www.ined.fr/en/everything_about_population/data/france/deaths-causes-mortality/mortality-rates-sex-age/ on 27 May 2018
 }

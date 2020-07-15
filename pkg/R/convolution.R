@@ -62,7 +62,8 @@ blur <- function(x, cvv, warnings = TRUE){
 #' cvv <- c(0, 0.3, 0.5, 0.2)
 #' # create a convolved version of x:
 #' y <- blur(x, cvv)
-#' # recover the original version of x, given its convolved version and the original convolution probabilities:
+#' # recover the original version of x, given its blurred version 
+#' # and the original convolution probabilities:
 #' sharpen(y, cvv)
 sharpen <- function(y, cvv, warnings = FALSE, digits = NULL){
   y2 <- c(rep(0, length(cvv)), y)

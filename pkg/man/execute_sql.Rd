@@ -4,9 +4,17 @@
 \alias{execute_sql}
 \title{Execute SQL}
 \usage{
-execute_sql(channel, filename, sub_in = NULL, sub_out = NULL,
-  fixed = TRUE, error_action = "stop",
-  log_table = "dbo.sql_executed_by_r_log", verbose = FALSE, ...)
+execute_sql(
+  channel,
+  filename,
+  sub_in = NULL,
+  sub_out = NULL,
+  fixed = TRUE,
+  error_action = "stop",
+  log_table = "dbo.sql_executed_by_r_log",
+  verbose = FALSE,
+  ...
+)
 }
 \arguments{
 \item{channel}{connection handle as returned by RODBC::odbcConnect() of class RODBC}

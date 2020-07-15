@@ -4,8 +4,18 @@
 \alias{bcp}
 \title{bulk upload of a pipe delimited text file to an existing table in a SQL Survey database}
 \usage{
-bcp(server, database, schema, table, file, user = NULL, pwd = NULL,
-  verbose = FALSE, extra_args = " -b 1000000", delim = "|")
+bcp(
+  server,
+  database,
+  schema,
+  table,
+  file,
+  user = NULL,
+  pwd = NULL,
+  verbose = FALSE,
+  extra_args = " -b 1000000",
+  delim = "|"
+)
 }
 \arguments{
 \item{server}{address of a SQL Server server eg 'localhost' or a URL}
