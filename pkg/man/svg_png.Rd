@@ -4,8 +4,7 @@
 \alias{svg_png}
 \title{Draw a graphic as both an SVG and a PNG}
 \usage{
-svg_png(p, file, w = 8, h = 5, res = 600, googlefonts = c("Roboto",
-  "Sarala"))
+svg_png(p, file, w = 8, h = 5, res = 600, googlefonts = c("Roboto", "Sarala"))
 }
 \arguments{
 \item{p}{ggplot2 object to draw, or base plot as a function}

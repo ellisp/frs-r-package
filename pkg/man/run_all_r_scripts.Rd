@@ -4,8 +4,14 @@
 \alias{run_all_r_scripts}
 \title{Run all R scripts in a folder system}
 \usage{
-run_all_r_scripts(path, recursive = TRUE, verbose = TRUE,
-  push_through = FALSE, cleanup = TRUE, suppress_messages = TRUE)
+run_all_r_scripts(
+  path,
+  recursive = TRUE,
+  verbose = TRUE,
+  push_through = FALSE,
+  cleanup = TRUE,
+  suppress_messages = TRUE
+)
 }
 \arguments{
 \item{path}{relative file path to the folder with R scripts to run}

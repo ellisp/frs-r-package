@@ -4,7 +4,9 @@
 \name{fonterra}
 \alias{fonterra}
 \title{Closing share price of Fonterra Cooperative Group}
-\format{A data frame with 976 rows and 2 variables.}
+\format{
+A data frame with 976 rows and 2 variables.
+}
 \source{
 New Zealand Stock Exchange via Yahoo Finance
 }

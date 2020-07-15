@@ -4,7 +4,9 @@
 \name{dairy}
 \alias{dairy}
 \title{Whole Milk Powder Price Indices}
-\format{A data frame with 170 rows and 2 variables.}
+\format{
+A data frame with 170 rows and 2 variables.
+}
 \source{
 Global Dairy Trade database via Qandl
 }

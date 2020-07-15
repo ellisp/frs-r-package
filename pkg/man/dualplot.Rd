@@ -4,14 +4,31 @@
 \alias{dualplot}
 \title{Dual scale time series plot}
 \usage{
-dualplot(x1, y1, y2, x2 = x1, col = c("#C54E6D", "#009380"),
-  lwd = c(1, 1), colgrid = NULL, mar = c(3, 6, 3, 6) + 0.1,
+dualplot(
+  x1,
+  y1,
+  y2,
+  x2 = x1,
+  col = c("#C54E6D", "#009380"),
+  lwd = c(1, 1),
+  colgrid = NULL,
+  mar = c(3, 6, 3, 6) + 0.1,
   ylab1 = paste(substitute(y1), collapse = ""),
-  ylab2 = paste(substitute(y2), collapse = ""), nxbreaks = 5,
+  ylab2 = paste(substitute(y2), collapse = ""),
+  nxbreaks = 5,
   yleg1 = paste(gsub("\\n$", "", ylab1), "(left axis)"),
-  yleg2 = paste(ylab2, "(right axis)"), ylim1 = NULL, ylim2 = NULL,
-  ylim.ref = NULL, xlab = "", main = NULL, legx = "topleft",
-  legy = NULL, bty = "n", silent = FALSE, ...)
+  yleg2 = paste(ylab2, "(right axis)"),
+  ylim1 = NULL,
+  ylim2 = NULL,
+  ylim.ref = NULL,
+  xlab = "",
+  main = NULL,
+  legx = "topleft",
+  legy = NULL,
+  bty = "n",
+  silent = FALSE,
+  ...
+)
 }
 \arguments{
 \item{x1}{x coordinates for first series}
@@ -85,8 +102,8 @@ data(fonterra)
 # with defaults for positioning scales, but exemplifying custom colours, etc:
 dualplot(x1 = dairy$Date, y1 = dairy$WMP_Total, 
          x2 = fonterra$Date, y2 = fonterra$FCGClose,
-         ylab1 = "Whole milk powder price index\\n",
-         ylab2 = "Fonterra Cooperative Group\\nshare price ($)",
+         ylab1 = "Whole milk powder price index\n",
+         ylab2 = "Fonterra Cooperative Group\nshare price ($)",
          col = c("#AA6800", "#7869CD"),
          colgrid = "grey90",
          main = "Fonterra share prices are less volatile than global milk prices")

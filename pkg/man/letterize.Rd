@@ -4,8 +4,11 @@
 \alias{letterize}
 \title{Letterize}
 \usage{
-letterize(x, method = c("random", "original", "frequency"),
-  output = c("original", "character", "factor"))
+letterize(
+  x,
+  method = c("random", "original", "frequency"),
+  output = c("original", "character", "factor")
+)
 }
 \arguments{
 \item{x}{a factor or character}

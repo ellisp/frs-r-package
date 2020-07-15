@@ -4,8 +4,11 @@
 \alias{svg_googlefonts}
 \title{Add Google webfonts to the style definition of an SVG file}
 \usage{
-svg_googlefonts(svgfile, googlefonts = c("Roboto", "Sarala"),
-  new_svgfile = svgfile)
+svg_googlefonts(
+  svgfile,
+  googlefonts = c("Roboto", "Sarala"),
+  new_svgfile = svgfile
+)
 }
 \arguments{
 \item{svgfile}{path to an SVG}
