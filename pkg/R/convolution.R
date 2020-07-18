@@ -4,33 +4,38 @@
 #' One-dimensional convolution
 #'
 #' @param x a vector of counts or other numbers
-#' @param cvv a vector of probabilities to convolve x at various lags. First value should be for lag 0, 
+#' @param pmf a vector of probabilities to convolve x at various lags. First value should be for lag 0, 
 #' second for lag 1, etc. (stands for "convolution vector")
 #' @param warnings whether to show warnings when the resulting vector does not add up to the
 #' same sum as the original
+#' @param scale_pmf whether or not to scale pmf so it adds exactly to one
 #' @details ...
-#' @return A vector of length equal to the length of x plus length of cvv minus 1
+#' @return A vector of length equal to the length of x plus length of pmf minus 1
 #' @export
 #' @importFrom dplyr left_join
 #' @examples 
 #' x <- c(4,6,8,9,7,5)
-#' cvv <- c(0, 0.3, 0.5, 0.2)
-#' blur(x, cvv)
-blur <- function(x, cvv, warnings = TRUE){
+#' pmf <- c(0, 0.3, 0.5, 0.2)
+#' blur(x, pmf)
+blur <- function(x, pmf, warnings = TRUE, scale_pmf = FALSE){
   
   if(!class(x) %in% c("integer", "numeric") || !is.null(dim(x))){
     stop("x should be a numeric vector of numbers")
   }
   
-  if(!"numeric" %in% class(cvv) || !is.null(dim(cvv))){
-    stop("cvv should be a numeric vector of probabilities")
+  if(!"numeric" %in% class(pmf) || !is.null(dim(pmf))){
+    stop("pmf should be a numeric vector of probabilities")
   }
   
-  cvd <- data.frame(cvv = cvv, link = 1, lag = 0:(length(cvv) - 1))
+  if(scale_pmf){
+    pmf <- pmf / sum(pmf)
+  }
+  
+  cvd <- data.frame(pmf = pmf, link = 1, lag = 0:(length(pmf) - 1))
   orig <- data.frame(x = x, link = 1)
   orig$position <- 1:nrow(orig)
   combined <- dplyr::left_join(orig, cvd, by = "link")
-  combined$z <- with(combined, x * cvv)
+  combined$z <- with(combined, x * pmf)
   combined$new_position <- with(combined, position + lag)
   y <- aggregate(combined$z, list(combined$new_position), sum)$x
   
@@ -46,12 +51,12 @@ blur <- function(x, cvv, warnings = TRUE){
 #' Single dimensional deconvolution
 #' 
 #' @param y a vector of values to be deconvolved
-#' @param cvv a vector of probabilities for the original convolution that created y
+#' @param pmf a vector of probabilities for the original convolution that created y
 #' @param warnings passed through to blur
 #' @param digits how many digits to round the deconvolved values to. If NULL no rounding occurs.
 #' @details This is simply the inverse of blur. However there is no closed solution so the
 #' result is estimated numerically. The column x from the data frame returned by this function is
-#' a set of values that, if blur is applied to it with the cvv vector of probabilities, will
+#' a set of values that, if blur is applied to it with the pmf vector of probabilities, will
 #' return y.
 #' @return a data frame with columns for x (the inferred original values what were convolved to y),
 #' y (which will be padded out with some extra zeroes), and position (which is the numbering of the
@@ -59,19 +64,19 @@ blur <- function(x, cvv, warnings = TRUE){
 #' @export
 #' @examples 
 #' x <- c(4,6,8,9,7,5)
-#' cvv <- c(0, 0.3, 0.5, 0.2)
+#' pmf <- c(0, 0.3, 0.5, 0.2)
 #' # create a convolved version of x:
-#' y <- blur(x, cvv)
+#' y <- blur(x, pmf)
 #' # recover the original version of x, given its blurred version 
 #' # and the original convolution probabilities:
-#' sharpen(y, cvv)
-sharpen <- function(y, cvv, warnings = FALSE, digits = NULL){
-  y2 <- c(rep(0, length(cvv)), y)
-  starter_x <- c(y, rep(0, length(cvv)))
+#' sharpen(y, pmf)
+sharpen <- function(y, pmf, warnings = FALSE, digits = NULL){
+  y2 <- c(rep(0, length(pmf)), y)
+  starter_x <- c(y, rep(0, length(pmf)))
   
   fn <- function(x){
     x <- x / sum(x) * sum(y2)
-    d <- sqrt(sum((blur(x, cvv, warnings = warnings)[1:length(x)] - y2) ^ 2))
+    d <- sqrt(sum((blur(x, pmf, warnings = warnings, scale_pmf = TRUE)[1:length(x)] - y2) ^ 2))
     return(d)
   }
   

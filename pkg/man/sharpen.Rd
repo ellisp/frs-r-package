@@ -4,12 +4,12 @@
 \alias{sharpen}
 \title{Single dimensional deconvolution}
 \usage{
-sharpen(y, cvv, warnings = FALSE, digits = NULL)
+sharpen(y, pmf, warnings = FALSE, digits = NULL)
 }
 \arguments{
 \item{y}{a vector of values to be deconvolved}
 
-\item{cvv}{a vector of probabilities for the original convolution that created y}
+\item{pmf}{a vector of probabilities for the original convolution that created y}
 
 \item{warnings}{passed through to blur}
 
@@ -26,15 +26,15 @@ Single dimensional deconvolution
 \details{
 This is simply the inverse of blur. However there is no closed solution so the
 result is estimated numerically. The column x from the data frame returned by this function is
-a set of values that, if blur is applied to it with the cvv vector of probabilities, will
+a set of values that, if blur is applied to it with the pmf vector of probabilities, will
 return y.
 }
 \examples{
 x <- c(4,6,8,9,7,5)
-cvv <- c(0, 0.3, 0.5, 0.2)
+pmf <- c(0, 0.3, 0.5, 0.2)
 # create a convolved version of x:
-y <- blur(x, cvv)
+y <- blur(x, pmf)
 # recover the original version of x, given its blurred version 
 # and the original convolution probabilities:
-sharpen(y, cvv)
+sharpen(y, pmf)
 }

@@ -4,19 +4,21 @@
 \alias{blur}
 \title{One-dimensional convolution}
 \usage{
-blur(x, cvv, warnings = TRUE)
+blur(x, pmf, warnings = TRUE, scale_pmf = FALSE)
 }
 \arguments{
 \item{x}{a vector of counts or other numbers}
 
-\item{cvv}{a vector of probabilities to convolve x at various lags. First value should be for lag 0, 
+\item{pmf}{a vector of probabilities to convolve x at various lags. First value should be for lag 0, 
 second for lag 1, etc. (stands for "convolution vector")}
 
 \item{warnings}{whether to show warnings when the resulting vector does not add up to the
 same sum as the original}
+
+\item{scale_pmf}{whether or not to scale pmf so it adds exactly to one}
 }
 \value{
-A vector of length equal to the length of x plus length of cvv minus 1
+A vector of length equal to the length of x plus length of pmf minus 1
 }
 \description{
 One-dimensional convolution
@@ -26,6 +28,6 @@ One-dimensional convolution
 }
 \examples{
 x <- c(4,6,8,9,7,5)
-cvv <- c(0, 0.3, 0.5, 0.2)
-blur(x, cvv)
+pmf <- c(0, 0.3, 0.5, 0.2)
+blur(x, pmf)
 }
