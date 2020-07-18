@@ -49,14 +49,14 @@ bcp <- function(server, database, schema, table, file, user = NULL, pwd = NULL, 
                  database, '].[', schema, '].[', table, 
                  '] format nul -c -x -f ', 
                  ff_file, 
-                 ' -t | -S nous-pssa01.database.windows.net -U ',
+                 ' -t | -S ', server, ' -U ',
                  user, ' -P ', pwd, extra_args)
     cmd <- paste0('bcp [', 
                   database, '].[', schema, '].[', table, 
                   '] in ', 
                   file, ' -f ',
                   ff_file, 
-                  '  -S nous-pssa01.database.windows.net -U ',
+                  '  -S ', server, ' -U ',
                   user, ' -P ', pwd, extra_args)
   }  
   
