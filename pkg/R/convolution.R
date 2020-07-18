@@ -4,12 +4,15 @@
 #' One-dimensional convolution
 #'
 #' @param x a vector of counts or other numbers
-#' @param pmf a vector of probabilities to convolve x at various lags. First value should be for lag 0, 
-#' second for lag 1, etc. (stands for "convolution vector")
+#' @param pmf a vector of probabilities to delay x at various lags. First value should be for lag 0, 
+#' second for lag 1, etc. 
 #' @param warnings whether to show warnings when the resulting vector does not add up to the
 #' same sum as the original
 #' @param scale_pmf whether or not to scale pmf so it adds exactly to one
-#' @details ...
+#' @details \code{blur} and \code{sharpen} are deterministic single dimensional convolution functions
+#' for simple convolution by a lagged probability mass function representing the proportion of original
+#' cases that are delayed at various lags. They are for illustrative / toy purposes and probably should
+#' not be used for actual analysis.
 #' @return A vector of length equal to the length of x plus length of pmf minus 1
 #' @export
 #' @importFrom dplyr left_join
@@ -54,13 +57,20 @@ blur <- function(x, pmf, warnings = TRUE, scale_pmf = FALSE){
 #' @param pmf a vector of probabilities for the original convolution that created y
 #' @param warnings passed through to blur
 #' @param digits how many digits to round the deconvolved values to. If NULL no rounding occurs.
-#' @details This is simply the inverse of blur. However there is no closed solution so the
-#' result is estimated numerically. The column x from the data frame returned by this function is
-#' a set of values that, if blur is applied to it with the pmf vector of probabilities, will
-#' return y.
+#' @details \code{blur} and \code{sharpen} are deterministic single dimensional convolution functions
+#' for simple convolution by a lagged probability mass function representing the proportion of original
+#' cases that are delayed at various lags. They are for illustrative / toy purposes and probably should
+#' not be used for actual analysis.
+#' 
+#' Use \code{\link[surveillance]{backprojNP}} for a better, maximum likelihood approach to recovering
+#' an unseen set of original cases that result in the observations.
+#' 
+#' \code{sharpen} is the inverse of \code{blur}; it seeks to recover an original vector that, when blurred
+#' via \code{pmf}, would produce the actual observations.
 #' @return a data frame with columns for x (the inferred original values what were convolved to y),
 #' y (which will be padded out with some extra zeroes), and position (which is the numbering of the
 #' row relative to the original ordering of y; so position = 1 refers to the first value of y)
+#' @seealso \code{\link[surveillance]{backprojNP}}.
 #' @export
 #' @examples 
 #' x <- c(4,6,8,9,7,5)

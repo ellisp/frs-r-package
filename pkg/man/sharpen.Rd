@@ -24,10 +24,16 @@ row relative to the original ordering of y; so position = 1 refers to the first 
 Single dimensional deconvolution
 }
 \details{
-This is simply the inverse of blur. However there is no closed solution so the
-result is estimated numerically. The column x from the data frame returned by this function is
-a set of values that, if blur is applied to it with the pmf vector of probabilities, will
-return y.
+\code{blur} and \code{sharpen} are deterministic single dimensional convolution functions
+for simple convolution by a lagged probability mass function representing the proportion of original
+cases that are delayed at various lags. They are for illustrative / toy purposes and probably should
+not be used for actual analysis.
+
+Use \code{\link[surveillance]{backprojNP}} for a better, maximum likelihood approach to recovering
+an unseen set of original cases that result in the observations.
+
+\code{sharpen} is the inverse of \code{blur}; it seeks to recover an original vector that, when blurred
+via \code{pmf}, would produce the actual observations.
 }
 \examples{
 x <- c(4,6,8,9,7,5)
@@ -37,4 +43,7 @@ y <- blur(x, pmf)
 # recover the original version of x, given its blurred version 
 # and the original convolution probabilities:
 sharpen(y, pmf)
+}
+\seealso{
+\code{\link[surveillance]{backprojNP}}.
 }

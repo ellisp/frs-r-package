@@ -9,8 +9,8 @@ blur(x, pmf, warnings = TRUE, scale_pmf = FALSE)
 \arguments{
 \item{x}{a vector of counts or other numbers}
 
-\item{pmf}{a vector of probabilities to convolve x at various lags. First value should be for lag 0, 
-second for lag 1, etc. (stands for "convolution vector")}
+\item{pmf}{a vector of probabilities to delay x at various lags. First value should be for lag 0, 
+second for lag 1, etc.}
 
 \item{warnings}{whether to show warnings when the resulting vector does not add up to the
 same sum as the original}
@@ -24,7 +24,10 @@ A vector of length equal to the length of x plus length of pmf minus 1
 One-dimensional convolution
 }
 \details{
-...
+\code{blur} and \code{sharpen} are deterministic single dimensional convolution functions
+for simple convolution by a lagged probability mass function representing the proportion of original
+cases that are delayed at various lags. They are for illustrative / toy purposes and probably should
+not be used for actual analysis.
 }
 \examples{
 x <- c(4,6,8,9,7,5)
