@@ -40,6 +40,8 @@ elo_prob <- function(a, b, ml, a_adv = 0, b_adv = 0){
 #' @param bxp total match lengths (experience) of player b until this match
 #' @param a_adv any arbitrary advantage that player a gets on top of the usual comparison of ratings,
 #' for example from home town advantage
+#' @param b_adv any arbitrary advantage that player b gets on top of the usual comparison of ratings,
+#' for example from home town advantage
 #' @details See http://www.fibs.com/ratings.html for formulae
 #' @examples 
 #' # baptism by fire; a's rating should be 1540.95 after beating a master player:
