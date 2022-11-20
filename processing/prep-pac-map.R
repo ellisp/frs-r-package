@@ -109,9 +109,9 @@ pac_map_sf <- cbind(pac, st_coordinates(pac_c)) |>
   # note this is EEZ of whole country, so Kiribati has all in one number not split in 3,
   # and will have 3 reps of the same number
   
-save(pac_map_sf, file = "pkg/data/pac_map_sf.rda")
-save(country_borders_tb, file = "pkg/data/country_borders_tb.rda")
-save(international_date_line_sf, file = "pkg/data/international_date_line_sf.rda")
+save(pac_map_sf, file = "pkg/data/pac_map_sf.rda", compress = "xz")
+save(country_borders_tb, file = "pkg/data/country_borders_tb.rda", compress = "xz")
+save(international_date_line_sf, file = "pkg/data/international_date_line_sf.rda", compress = "xz")
 
 
 
