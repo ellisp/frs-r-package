@@ -73,7 +73,7 @@ datetime_ch <- function(dt){
 #' @param ... other arguments to be passed to \code{sqlQuery()}, such as \code{stringsAsFactors = FALSE}.
 #' @examples
 #' \dontrun{
-#' ch <- dbConnect(odbc(), "some_dsn_name", database = "some_database")
+#' ch <- dbConnect(odbc::odbc(), "some_dsn_name", database = "some_database")
 #' execute_sql(ch, "some_file.sql")
 #' }
 #' @author Peter Ellis

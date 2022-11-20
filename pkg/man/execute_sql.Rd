@@ -81,7 +81,7 @@ CREATE TABLE some_database.dbo.sql_executed_by_r_log
 }
 \examples{
 \dontrun{
-ch <- dbConnect(odbc(), "some_dsn_name", database = "some_database")
+ch <- dbConnect(odbc::odbc(), "some_dsn_name", database = "some_database")
 execute_sql(ch, "some_file.sql")
 }
 }
