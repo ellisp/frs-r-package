@@ -23,6 +23,7 @@ Like a Box-Cox transformation, but it works with negative numbers too:
 ```r
 library(ggplot2)
 library(frs)
+set.seed(123)
 eg_data <- data.frame(x = exp(rnorm(1000)) * 
                sample(c(-1, 1), 1000, replace = TRUE, prob = c(0.2, 0.8)))
 
