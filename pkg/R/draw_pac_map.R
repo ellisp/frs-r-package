@@ -16,6 +16,7 @@
 #' @param idl_col Colour to use for the International date line
 #' @param leg_pos Legend position (in grid units i.e. 0,0 is bottom left, 1,1 is top right)
 #' @importFrom ggplot2 ggplot geom_polygon annotate geom_text theme_minimal theme geom_sf coord_sf
+#' @export
 #' @returns A ggplot2 object
 draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL, 
                          xlim = c(120, 240), ylim = c(-50, 50),
