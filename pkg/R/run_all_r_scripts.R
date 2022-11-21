@@ -26,7 +26,7 @@ run_all_r_scripts <- function(path, recursive = TRUE, verbose = TRUE,
     }
     if(push_through){
       res <- try(suppressMessages(source(f)))
-      if(class(res) == "try-error"){
+      if(class(res)[1] == "try-error"){
         errors <- errors + 1
       }
       

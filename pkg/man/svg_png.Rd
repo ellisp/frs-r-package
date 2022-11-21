@@ -41,5 +41,7 @@ if(require(lattice)){
   p3 <- xyplot(lat ~ long | Depth, data = quakes)
   svg_png(p3, "p3")
   }
+  
+sapply(c("p1.png", "p1.svg", "p2.png", "p2.svg", "p3.svg", "p3.png"), unlink)
 
 }
