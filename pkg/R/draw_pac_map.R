@@ -27,11 +27,12 @@
 #' 
 #' draw_pac_map(country_label_size = 5)
 draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL, 
+                         fill_col_label = fill_col,
                          xlim = c(120, 240), ylim = c(-50, 50),
                          country_label_size = 3, country_label_col = "black",
                          idl_col = "steelblue", idl_label_size = country_label_size, 
                          leg_pos = c(0.8, 0.7), ocean_col = "lightsteelblue",
-                         family = "Calibri"){
+                         family = "sans"){
   
   if(is.null(fill_df)){
     m0 <- pac_map_sf |>
@@ -71,7 +72,7 @@ draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL,
     ggplot2::coord_sf(xlim = xlim,  ylim = ylim) +
     ggplot2::labs(x = "",
          y = "",
-         fill = fill_col)
+         fill = fill_col_label)
   
   return(m1)  
 }

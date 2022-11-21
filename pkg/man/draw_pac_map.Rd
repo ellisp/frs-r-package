@@ -16,7 +16,7 @@ draw_pac_map(
   idl_label_size = country_label_size,
   leg_pos = c(0.8, 0.7),
   ocean_col = "lightsteelblue",
-  family = "Calibri"
+  family = "sans"
 )
 }
 \arguments{
