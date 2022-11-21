@@ -8,8 +8,11 @@ draw_pac_map(
   fill_df = NULL,
   join_col = "geo_pict",
   fill_col = NULL,
+  fill_col_label = fill_col,
+  base_size = 11,
   xlim = c(120, 240),
   ylim = c(-50, 50),
+  country_labels = TRUE,
   country_label_size = 3,
   country_label_col = "black",
   idl_col = "steelblue",
@@ -29,9 +32,15 @@ those columns in pac_map_sf}
 
 \item{fill_col}{Column in fill_df to map to colour}
 
+\item{fill_col_label}{Label for the fill colour legend}
+
+\item{base_size}{base size of fonts eg for title, passed on to theme_minimal()}
+
 \item{xlim}{longitude to limit the map to}
 
 \item{ylim}{latitude to limt the map to}
+
+\item{country_labels}{whether or not to print the country names as labels (Palau, Guam, etc)}
 
 \item{country_label_size}{Size of country labels. Set to zero to make them invisible.}
 

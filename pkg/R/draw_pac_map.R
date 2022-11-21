@@ -10,15 +10,18 @@
 #' @param join_col Name of a column in fill_df to join to pac_map_sf. Should be
 #'   either geo_pict, iso3, or name2, and needs to match exactly the contents of
 #'   those columns in pac_map_sf
+#' @param fill_col Column in fill_df to map to colour
+#' @param fill_col_label Label for the fill colour legend
+#' @param base_size base size of fonts eg for title, passed on to theme_minimal()
+#' @param xlim longitude to limit the map to
+#' @param ylim latitude to limt the map to
+#' @param country_labels whether or not to print the country names as labels (Palau, Guam, etc)
 #' @param country_label_size Size of country labels. Set to zero to make them invisible.
 #' @param country_label_col  Colour of country labels.
+#' @param idl_col Colour to use for the International date line
 #' @param idl_label_size Size of the International date line label,
 #' @param ocean_col Colour to draw the ocean
 #' @param family Font family
-#' @param fill_col Column in fill_df to map to colour
-#' @param xlim longitude to limit the map to
-#' @param ylim latitude to limt the map to
-#' @param idl_col Colour to use for the International date line
 #' @param leg_pos Legend position (in grid units i.e. 0,0 is bottom left, 1,1 is top right)
 #' @importFrom ggplot2 ggplot geom_polygon annotate geom_text theme_minimal theme geom_sf coord_sf
 #' @export
@@ -28,7 +31,9 @@
 #' draw_pac_map(country_label_size = 5)
 draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL, 
                          fill_col_label = fill_col,
+                         base_size = 11,
                          xlim = c(120, 240), ylim = c(-50, 50),
+                         country_labels = TRUE,
                          country_label_size = 3, country_label_col = "black",
                          idl_col = "steelblue", idl_label_size = country_label_size, 
                          leg_pos = c(0.8, 0.7), ocean_col = "lightsteelblue",
@@ -61,10 +66,17 @@ draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL,
                  alpha = 0.8) +
     ggplot2::geom_sf(data = international_date_line_sf, colour = idl_col, linetype = 1, alpha = 0.5) +
     annotate("text", x = 182, y = 38, label = "International date line", 
-             colour = idl_col, hjust = 0, family = family, size = idl_label_size) +
-    ggplot2::geom_text(aes(label = name2, x = X, y = Y),
-              colour = country_label_col, family = family, size = country_label_size, angle = 15) +
-    ggplot2::theme_minimal(base_family = family) +
+             colour = idl_col, hjust = 0, family = family, size = idl_label_size) 
+  
+  if(country_labels){
+    m1 <- m1 + 
+      ggplot2::geom_text(aes(label = name2, x = X, y = Y),
+                         colour = country_label_col, family = family, size = country_label_size, angle = 15) 
+      
+  }
+  
+  m1 <- m1 +
+    ggplot2::theme_minimal(base_family = family, base_size = base_size) +
     ggplot2::theme(legend.position = leg_pos,
           panel.background = element_rect(fill = ocean_col, colour = NA),
           panel.grid = element_blank(),
