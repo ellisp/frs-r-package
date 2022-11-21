@@ -119,7 +119,7 @@ save(international_date_line_sf, file = "pkg/data/international_date_line_sf.rda
 ff <- "Roboto"
 
 sf_use_s2(FALSE) # so reticules still drawn on right half of map
-m1 <- pac |>
+m1 <- pac_map_sf |>
   ggplot() +
   geom_sf(aes(fill = dens_cat), colour = "grey70", alpha = 0.9) +
   geom_polygon(data = country_borders,

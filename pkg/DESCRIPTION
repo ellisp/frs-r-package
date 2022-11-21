@@ -5,7 +5,7 @@ Authors@R: person("Peter", "Ellis", email = "peter.ellis2013nz@gmail.com", role 
 Description: Miscellaneous functions for simulating, presenting and analysing data, associated with the Peter's Stats Stuff blog at https://ellisp.github.io.
 Depends: R (>= 3.5.0), scales, ggplot2, rmarkdown
 Imports: stats, grDevices, DBI, stringr, Cairo, svglite, dplyr
-Suggests: lattice, odbc, surveillance
+Suggests: lattice, odbc, surveillance, sf
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

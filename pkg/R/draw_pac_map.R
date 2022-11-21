@@ -1,0 +1,64 @@
+
+
+
+#' Draw map of Pacific Island countries and territories
+#' 
+#' @details draws a map of Padcific Island countries and territories EEZs, with
+#'   possibility of drawing it as a choropleth map.
+#' @param fill_df (Optional) A data frame with data to be used for colouring in
+#'   the EEZs
+#' @param join_col Name of a column in fill_df to join to pac_map_sf. Should be
+#'   either geo_pict, iso3, or name2, and needs to match exactly the contents of
+#'   those columns in pac_map_sf
+#' @param fill_col Column in fill_df to map to colour
+#' @param xlim longitude to limit the map to
+#' @param ylim latitude to limt the map to
+#' @param idl_col Colour to use for the International date line
+#' @param leg_pos Legend position (in grid units i.e. 0,0 is bottom left, 1,1 is top right)
+#' @returns A ggplot2 object
+draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL, 
+                         xlim = c(120, 240), ylim = c(-50, 50),
+                         idl_col = "steelblue", leg_pos = c(0.8, 0.7)){
+  
+  if(is.null(fill_df)){
+    m0 <- pac_map_sf |>
+      ggplot() +
+      geom_sf(colour = "grey70", alpha = 0.9) 
+    
+  } else {
+    d <- pac_map_sf |>
+      left_join(fill_df, by = join_col)
+    
+    if(nrow(d) != nrow(pac_map_sf)){
+      warning("Some extra rows in pac_map_sf introduced when trying to join to fill_df")
+    }
+    
+    d$fill_col <- pull(d, fill_col)
+    
+    m0 <- d |>
+      ggplot() +
+      geom_sf(aes(fill = fill_col), colour = "grey70", alpha = 0.9) 
+  }
+  
+  m1 <- m0 +
+    geom_polygon(data = country_borders_tb,
+                 aes(x = long, y = lat, group = group),
+                 fill = "white",
+                 alpha = 0.8) +
+    geom_sf(data = international_date_line, colour = idl_col, linetype = 1, alpha = 0.5) +
+    annotate("text", x = 182, y = 38, label = "International date line", 
+             colour = "steelblue", hjust = 0, family = ff, size = 3) +
+    geom_text(aes(label = name2, x = X, y = Y),
+              colour = "black", family = ff, size = 3, angle = 15) +
+    theme_minimal(base_family = ff) +
+    theme(legend.position = leg_pos,
+          panel.background = element_rect(fill = "lightsteelblue", colour = NA),
+          panel.grid = element_blank(),
+          plot.caption = element_text(colour = "grey50")) +
+    coord_sf(xlim = xlim,  ylim = ylim) +
+    labs(x = "",
+         y = "",
+         fill = fill_col)
+  
+  return(m1)  
+}

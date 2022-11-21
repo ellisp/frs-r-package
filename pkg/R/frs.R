@@ -2,7 +2,7 @@
 #' 
 #' Miscellaneous odds and ends associated with the Free Range Statistics blog
 #' 
-#' These are items that have been used in writing posts for \link{http://freerangestats.info} or at least
+#' These are items that have been used in writing posts for <http://freerangestats.info> or at least
 #' thinking about writing posts for it.
 #'  
 #' So far, the bits and pieces include:
