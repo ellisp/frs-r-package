@@ -10,8 +10,13 @@ draw_pac_map(
   fill_col = NULL,
   xlim = c(120, 240),
   ylim = c(-50, 50),
+  country_label_size = 3,
+  country_label_col = "black",
   idl_col = "steelblue",
-  leg_pos = c(0.8, 0.7)
+  idl_label_size = country_label_size,
+  leg_pos = c(0.8, 0.7),
+  ocean_col = "lightsteelblue",
+  family = "Calibri"
 )
 }
 \arguments{
@@ -28,9 +33,19 @@ those columns in pac_map_sf}
 
 \item{ylim}{latitude to limt the map to}
 
+\item{country_label_size}{Size of country labels. Set to zero to make them invisible.}
+
+\item{country_label_col}{Colour of country labels.}
+
 \item{idl_col}{Colour to use for the International date line}
 
+\item{idl_label_size}{Size of the International date line label,}
+
 \item{leg_pos}{Legend position (in grid units i.e. 0,0 is bottom left, 1,1 is top right)}
+
+\item{ocean_col}{Colour to draw the ocean}
+
+\item{family}{Font family}
 }
 \value{
 A ggplot2 object
@@ -41,4 +56,8 @@ Draw map of Pacific Island countries and territories
 \details{
 draws a map of Padcific Island countries and territories EEZs, with
   possibility of drawing it as a choropleth map.
+}
+\examples{
+
+draw_pac_map(country_label_size = 5)
 }
