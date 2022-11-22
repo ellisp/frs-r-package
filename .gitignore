@@ -35,3 +35,6 @@ vignettes/*.pdf
 
 *.png
 *.svg
+
+*.kml
+*.zip

@@ -28,6 +28,8 @@
 #'   p3 <- xyplot(lat ~ long | Depth, data = quakes)
 #'   svg_png(p3, "p3")
 #'   }
+#'   
+#' sapply(c("p1.png", "p1.svg", "p2.png", "p2.svg", "p3.svg", "p3.png"), unlink)
 #' 
 svg_png <- function(p, file, w = 8, h = 5, res = 600, googlefonts = c("Roboto", "Sarala")){
   

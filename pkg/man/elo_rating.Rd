@@ -30,6 +30,9 @@ elo_rating(
 
 \item{a_adv}{any arbitrary advantage that player a gets on top of the usual comparison of ratings,
 for example from home town advantage}
+
+\item{b_adv}{any arbitrary advantage that player b gets on top of the usual comparison of ratings,
+for example from home town advantage}
 }
 \description{
 Determine Elo rating of two players given one has won a match

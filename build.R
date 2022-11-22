@@ -3,6 +3,8 @@ library(knitr)
 library(extrafont)
 knit("README.Rmd")
 
+source("processing/prep-pac-map.R")
+
 document("pkg")
 run_examples("pkg")
 

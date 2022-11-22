@@ -73,7 +73,7 @@ datetime_ch <- function(dt){
 #' @param ... other arguments to be passed to \code{sqlQuery()}, such as \code{stringsAsFactors = FALSE}.
 #' @examples
 #' \dontrun{
-#' ch <- dbConnect(odbc(), "some_dsn_name", database = "some_database")
+#' ch <- dbConnect(odbc::odbc(), "some_dsn_name", database = "some_database")
 #' execute_sql(ch, "some_file.sql")
 #' }
 #' @author Peter Ellis
@@ -82,7 +82,7 @@ execute_sql <- function(channel, filename, sub_in = NULL, sub_out = NULL, fixed 
                         verbose = FALSE, ...){
   
   check <- try( DBI::dbGetQuery(channel, "select 1"), silent = TRUE)
-  if(class(check) == "try-error"){
+  if(class(check)[1] == "try-error"){
     stop("Channel seems to be dead. Maybe re-create it with odbcConnect")
   }
   
@@ -145,14 +145,14 @@ execute_sql <- function(channel, filename, sub_in = NULL, sub_out = NULL, fixed 
     duration <- system.time({res <- DBI::dbGetQuery(channel, sql_split[[i]])})
     log_entry$duration <- duration[3]
     
-    if(class(res) == "data.frame"){
+    if(class(res)[1] == "data.frame"){
       txt <- paste("Downloaded a data.frame with", nrow(res), "rows and",
                    ncol(res), "columns in batch", i, ". Any commands left in batch", i, "were not run.")
       if(verbose){message(txt)}
       log_entry$result <- "data.frame"
       
     } 
-    if(class(res) == "character" & length(res) > 0){
+    if(class(res)[1] == "character" & length(res) > 0){
       message("\n\nI got this error message:")
       cat(res)
       log_entry$result <- "error"
@@ -183,7 +183,7 @@ execute_sql <- function(channel, filename, sub_in = NULL, sub_out = NULL, fixed 
     if(error_action == "stop" && log_entry$result == "error"){
       stop(paste("Stopping due to an error in", filename))
     }
-    if(class(res) == "data.frame"){
+    if(class(res)[1] == "data.frame"){
       if(i == n_batches){
         return(res)
       } else {
