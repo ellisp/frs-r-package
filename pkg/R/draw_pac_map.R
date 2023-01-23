@@ -23,7 +23,7 @@
 #' @param ocean_col Colour to draw the ocean
 #' @param family Font family
 #' @param leg_pos Legend position (in grid units i.e. 0,0 is bottom left, 1,1 is top right)
-#' @importFrom ggplot2 ggplot geom_polygon annotate geom_text theme_minimal theme geom_sf coord_sf
+#' @importFrom ggplot2 ggplot geom_polygon annotate geom_text theme_minimal theme geom_sf coord_sf .data
 #' @importFrom dplyr pull left_join
 #' @export
 #' @returns A ggplot2 object
@@ -70,12 +70,12 @@ draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL,
     
     m0 <- d |>
       ggplot2::ggplot() +
-      ggplot2::geom_sf(aes(fill = fill_col), colour = "grey70", alpha = 0.9) 
+      ggplot2::geom_sf(aes(fill = .data$fill_col), colour = "grey70", alpha = 0.9) 
   }
   
   m1 <- m0 +
     ggplot2::geom_polygon(data = country_borders_tb,
-                 aes(x = long, y = lat, group = group),
+                 aes(x = .data$long, y = .data$lat, group = .data$group),
                  fill = "white",
                  alpha = 0.8) +
     ggplot2::geom_sf(data = frs::international_date_line_sf, colour = idl_col, linetype = 1, alpha = 0.5) +
@@ -84,7 +84,7 @@ draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL,
   
   if(country_labels){
     m1 <- m1 + 
-      ggplot2::geom_text(aes(label = name2, x = X, y = Y),
+      ggplot2::geom_text(aes(label = .data$name2, x = .data$X, y = .data$Y),
                          colour = country_label_col, family = family, size = country_label_size, angle = 15) 
       
   }
