@@ -20,6 +20,7 @@ So far, the bits and pieces include:
 ## Choroplethmaps of the Pacific
 
 ```{r, fig.width = 9}
+library(frs)
 pac_map_sf
 draw_pac_map()
 ```

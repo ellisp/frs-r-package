@@ -22,6 +22,7 @@ So far, the bits and pieces include:
 
 
 ```r
+library(frs)
 pac_map_sf
 ```
 
@@ -50,11 +51,11 @@ pac_map_sf
 draw_pac_map()
 ```
 
-![plot of chunk unnamed-chunk-20](figure/unnamed-chunk-20-1.png)
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
 
 
 ```r
-country_data <- tribble(~name2, ~var,
+country_data <- tibble::tribble(~name2, ~var,
                         "Cook Islands", 5,
                         "Fiji", 10,
                         "Guam", 4,
@@ -70,7 +71,7 @@ draw_pac_map(fill_df = country_data, join_col = "name2", fill_col = "var") +
        fill = "")
 ```
 
-![plot of chunk unnamed-chunk-21](figure/unnamed-chunk-21-1.png)
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
 
 
 
@@ -94,7 +95,7 @@ p2 <- p1 +
 gridExtra::grid.arrange(p1 + labs(x= "Original scale"), p2, ncol = 2)
 ```
 
-![plot of chunk unnamed-chunk-22](figure/unnamed-chunk-22-1.png)
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
                      
 See my blog posts on this:
 
@@ -123,7 +124,7 @@ data(fonterra)
 ## The two series will be presented visually as though they had been converted to indexes.
 ```
 
-![plot of chunk unnamed-chunk-23](figure/unnamed-chunk-23-1.png)
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
 
 See my blog posts on this:
 
