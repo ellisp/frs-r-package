@@ -29,6 +29,21 @@
 #' @examples 
 #' 
 #' draw_pac_map(country_label_size = 5)
+#' 
+#' country_data <- tribble(~name2, ~var,
+#' "Cook Islands", 5,
+#'   "Fiji", 10,
+#'   "Guam", 4,
+#'   "Palau", 5,
+#'   "Niue", 20,
+#'   "Tonga", 3,
+#'   "Tuvalu", 17,
+#'   "Papua New Guinea", 12)
+#' 
+#' draw_pac_map(fill_df = country_data, join_col = "name2", fill_col = "var") +
+#'   scale_fill_viridis_c() +
+#'   labs(title = "Some random variables",
+#'   fill = "")
 draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL, 
                          fill_col_label = fill_col,
                          base_size = 11,
