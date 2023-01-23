@@ -3,9 +3,9 @@ Title: Miscellaneous Functions for Free Range Statistics
 Version: 0.8.0.9999
 Authors@R: person("Peter", "Ellis", email = "peter.ellis2013nz@gmail.com", role = c("aut", "cre"))
 Description: Miscellaneous functions for simulating, presenting and analysing data, associated with the Peter's Stats Stuff blog at https://ellisp.github.io.
-Depends: R (>= 3.5.0), scales, ggplot2, rmarkdown, sf
-Imports: stats, grDevices, DBI, stringr, Cairo, svglite, dplyr
-Suggests: lattice, odbc, surveillance
+Depends: R (>= 3.5.0), scales, ggplot2, rmarkdown
+Imports: stats, grDevices, DBI, stringr, Cairo, svglite, dplyr, utils
+Suggests: lattice, odbc, surveillance, tibble
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

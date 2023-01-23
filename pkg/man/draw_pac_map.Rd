@@ -70,7 +70,7 @@ draws a map of Padcific Island countries and territories EEZs, with
 
 draw_pac_map(country_label_size = 5)
 
-country_data <- tribble(~name2, ~var,
+country_data <- tibble::tribble(~name2, ~var,
 "Cook Islands", 5,
   "Fiji", 10,
   "Guam", 4,
