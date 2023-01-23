@@ -51,6 +51,10 @@ pac_map_sf
 draw_pac_map()
 ```
 
+```
+## st_as_s2(): dropping Z and/or M coordinate
+```
+
 ![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
 
 
@@ -69,6 +73,10 @@ draw_pac_map(fill_df = country_data, join_col = "name2", fill_col = "var") +
   scale_fill_viridis_c() +
   labs(title = "Some random variables",
        fill = "")
+```
+
+```
+## st_as_s2(): dropping Z and/or M coordinate
 ```
 
 ![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
