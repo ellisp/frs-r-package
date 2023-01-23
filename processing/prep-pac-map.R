@@ -114,33 +114,3 @@ save(country_borders_tb, file = "pkg/data/country_borders_tb.rda", compress = "x
 save(international_date_line_sf, file = "pkg/data/international_date_line_sf.rda", compress = "xz")
 
 
-
-#-------------------------combined map------------------------
-ff <- "Roboto"
-
-sf_use_s2(FALSE) # so reticules still drawn on right half of map
-m1 <- pac_map_sf |>
-  ggplot() +
-  geom_sf(aes(fill = dens_cat), colour = "grey70", alpha = 0.9) +
-  geom_polygon(data = country_borders,
-               aes(x = long, y = lat, group = group),
-               fill = "white",
-               alpha = 0.8) +
-  geom_sf(data = international_date_line, colour = "steelblue", linetype = 1, alpha = 0.5) +
-  annotate("text", x = 182, y = 38, label = "International date line", 
-           colour = "steelblue", hjust = 0, family = ff, size = 3) +
-  geom_text(aes(label = name2, x = X, y = Y),
-            colour = "black", family = ff, size = 3, angle = 15) +
-  theme_minimal(base_family = ff) +
-  scale_fill_manual(values = brewer.pal(9, "Oranges")) +
-  theme(legend.position = c(0.8, 0.7),
-        panel.background = element_rect(fill = "lightsteelblue", colour = NA),
-        panel.grid = element_blank(),
-        plot.caption = element_text(colour = "grey50")) +
-  coord_sf(xlim = c(120, 290),  ylim = c(-50, 50)) +
-  labs(title = "Exclusive economic zones (EEZs) of Pacific Community island countries and territories",
-       x = "",
-       y = "",
-       fill = "People per 1,000\nsquare km of EEZ",
-       caption = "Source: http://freerangestats.info with data from the Pacific Data Hub")
-
