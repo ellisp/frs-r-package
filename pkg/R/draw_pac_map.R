@@ -23,12 +23,29 @@
 #' @param ocean_col Colour to draw the ocean
 #' @param family Font family
 #' @param leg_pos Legend position (in grid units i.e. 0,0 is bottom left, 1,1 is top right)
-#' @importFrom ggplot2 ggplot geom_polygon annotate geom_text theme_minimal theme geom_sf coord_sf
+#' @importFrom ggplot2 ggplot geom_polygon annotate geom_text theme_minimal theme geom_sf coord_sf .data
+#' @importFrom dplyr pull left_join
+#' @importFrom sf st_is_valid
 #' @export
 #' @returns A ggplot2 object
 #' @examples 
 #' 
 #' draw_pac_map(country_label_size = 5)
+#' 
+#' country_data <- tibble::tribble(~name2, ~var,
+#' "Cook Islands", 5,
+#'   "Fiji", 10,
+#'   "Guam", 4,
+#'   "Palau", 5,
+#'   "Niue", 20,
+#'   "Tonga", 3,
+#'   "Tuvalu", 17,
+#'   "Papua New Guinea", 12)
+#' 
+#' draw_pac_map(fill_df = country_data, join_col = "name2", fill_col = "var") +
+#'   scale_fill_viridis_c() +
+#'   labs(title = "Some random variables",
+#'   fill = "")
 draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL, 
                          fill_col_label = fill_col,
                          base_size = 11,
@@ -39,38 +56,43 @@ draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL,
                          leg_pos = c(0.8, 0.7), ocean_col = "lightsteelblue",
                          family = "sans"){
   
+  # this is a bit of a hack so I can import from sf and use all of the sf methods
+  # for tidyverse objects without generating a note in the CRAN checks. There must
+  # be a better way to use the sf methods! but
+  if(!all(sf::st_is_valid(pac_map_sf))){
+    stop("pac_map_sf has in valid geometry")
+  }
+  
   if(is.null(fill_df)){
-    m0 <- pac_map_sf |>
-      ggplot2::ggplot() +
+    m0 <-  ggplot2::ggplot(pac_map_sf) +
       ggplot2::geom_sf(colour = "grey70", alpha = 0.9) 
     
   } else {
-    d <- pac_map_sf |>
-      dplyr::left_join(fill_df, by = join_col)
+    d <- dplyr::left_join(pac_map_sf, fill_df, by = join_col)
     
     if(nrow(d) != nrow(pac_map_sf)){
       warning("Some extra rows in pac_map_sf introduced when trying to join to fill_df")
     }
     
-    d$fill_col <- pull(d, fill_col)
+    d$fill_col <- dplyr::pull(d, fill_col)
     
     m0 <- d |>
       ggplot2::ggplot() +
-      ggplot2::geom_sf(aes(fill = fill_col), colour = "grey70", alpha = 0.9) 
+      ggplot2::geom_sf(aes(fill = .data$fill_col), colour = "grey70", alpha = 0.9) 
   }
   
   m1 <- m0 +
     ggplot2::geom_polygon(data = country_borders_tb,
-                 aes(x = long, y = lat, group = group),
+                 aes(x = .data$long, y = .data$lat, group = .data$group),
                  fill = "white",
                  alpha = 0.8) +
-    ggplot2::geom_sf(data = international_date_line_sf, colour = idl_col, linetype = 1, alpha = 0.5) +
+    ggplot2::geom_sf(data = frs::international_date_line_sf, colour = idl_col, linetype = 1, alpha = 0.5) +
     annotate("text", x = 182, y = 38, label = "International date line", 
              colour = idl_col, hjust = 0, family = family, size = idl_label_size) 
   
   if(country_labels){
     m1 <- m1 + 
-      ggplot2::geom_text(aes(label = name2, x = X, y = Y),
+      ggplot2::geom_text(aes(label = .data$name2, x = .data$X, y = .data$Y),
                          colour = country_label_col, family = family, size = country_label_size, angle = 15) 
       
   }

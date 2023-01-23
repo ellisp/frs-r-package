@@ -35,3 +35,7 @@ NULL
 #' @format A tibble with country borders of the world, suitable for using with Pacific-centred maps
 #' @source Pacific Data Hub
 NULL
+
+
+#' @importFrom utils globalVariables
+utils::globalVariables(c("country_borders_tb", "international_date_line_sf", "pac_map_sf"))

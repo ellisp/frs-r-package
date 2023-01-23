@@ -8,6 +8,7 @@ devtools::install_github("ellisp/frs-r-package/pkg")
 
 So far, the bits and pieces include:
 
+- choropleth maps of the Pacific
 - dual axis plots
 - so-called "modulus" transformation for ggplot2 scales, which is like a Box Cox of the absolute value then with the sign returned.  Excellent for visualising economic variables that can be zero or negative
 - French death rates data in 2015
@@ -15,6 +16,63 @@ So far, the bits and pieces include:
 - turn levels of a factor into letters, useful for quick and dirty confidentialisation
 - utility to download files only if fresh
 - some ODBC database odds and ends to help with R interacting with SQL Server
+
+
+## Choroplethmaps of the Pacific
+
+
+```r
+library(frs)
+pac_map_sf
+```
+
+```
+## Simple feature collection with 24 features and 6 fields
+## Geometry type: POLYGON
+## Dimension:     XYZ
+## Bounding box:  xmin: 129.5088 ymin: -31.24447 xmax: 238.891 ymax: 23.89565
+## z_range:       zmin: 0 zmax: 0
+## Geodetic CRS:  WGS 84
+## First 10 features:
+##    id                           name2        X          Y geo_pict iso3                       geometry
+## 1   1                  American Samoa 190.9359 -13.855010       AS  ASM POLYGON Z ((186.2253 -11.04...
+## 2   2                    Cook Islands 198.6964 -15.020082       CK  COK POLYGON Z ((191.4764 -10.02...
+## 3   3                            Fiji 177.6701 -17.979529       FJ  FJI POLYGON Z ((180.2498 -14.19...
+## 4   4                French Polynesia 215.9955 -18.732371       PF  PYF POLYGON Z ((204.9461 -12.48...
+## 5   5 Micronesia, Federated States of 150.3232   6.768882       FM  FSM POLYGON Z ((135.3156 11.486...
+## 6   6                            Guam 144.0046  12.930932       GU  GUM POLYGON Z ((142.0952 15.726...
+## 7   7                        Kiribati 173.8879  -0.258948       KI  KIR POLYGON Z ((180.0038 -1.594...
+## 8   8                        Kiribati 205.2727  -3.819746       KI  KIR POLYGON Z ((196.9363 2.6611...
+## 9   9                        Kiribati 187.5461  -3.731807       KI  KIR POLYGON Z ((182.547 -3.0148...
+## 10 10                Marshall Islands 167.4853  10.146401       MH  MHL POLYGON Z ((157.4639 10.423...
+```
+
+```r
+draw_pac_map()
+```
+
+![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
+
+
+```r
+country_data <- tibble::tribble(~name2, ~var,
+                        "Cook Islands", 5,
+                        "Fiji", 10,
+                        "Guam", 4,
+                        "Palau", 5,
+                        "Niue", 20,
+                        "Tonga", 3,
+                        "Tuvalu", 17,
+                        "Papua New Guinea", 12)
+
+draw_pac_map(fill_df = country_data, join_col = "name2", fill_col = "var") +
+  scale_fill_viridis_c() +
+  labs(title = "Some random variables",
+       fill = "")
+```
+
+![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
+
 
 
 ## Modulus transformation
@@ -37,7 +95,7 @@ p2 <- p1 +
 gridExtra::grid.arrange(p1 + labs(x= "Original scale"), p2, ncol = 2)
 ```
 
-![plot of chunk unnamed-chunk-2](figure/unnamed-chunk-2-1.png)
+![plot of chunk unnamed-chunk-4](figure/unnamed-chunk-4-1.png)
                      
 See my blog posts on this:
 
@@ -66,7 +124,7 @@ data(fonterra)
 ## The two series will be presented visually as though they had been converted to indexes.
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png)
+![plot of chunk unnamed-chunk-5](figure/unnamed-chunk-5-1.png)
 
 See my blog posts on this:
 

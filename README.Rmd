@@ -7,6 +7,7 @@ devtools::install_github("ellisp/frs-r-package/pkg")
 
 So far, the bits and pieces include:
 
+- choropleth maps of the Pacific
 - dual axis plots
 - so-called "modulus" transformation for ggplot2 scales, which is like a Box Cox of the absolute value then with the sign returned.  Excellent for visualising economic variables that can be zero or negative
 - French death rates data in 2015
@@ -16,9 +17,38 @@ So far, the bits and pieces include:
 - some ODBC database odds and ends to help with R interacting with SQL Server
 
 
+## Choroplethmaps of the Pacific
+
+```{r, fig.width = 9}
+library(frs)
+pac_map_sf
+draw_pac_map()
+```
+
+```{r}
+country_data <- tibble::tribble(~name2, ~var,
+                        "Cook Islands", 5,
+                        "Fiji", 10,
+                        "Guam", 4,
+                        "Palau", 5,
+                        "Niue", 20,
+                        "Tonga", 3,
+                        "Tuvalu", 17,
+                        "Papua New Guinea", 12)
+
+draw_pac_map(fill_df = country_data, join_col = "name2", fill_col = "var") +
+  scale_fill_viridis_c() +
+  labs(title = "Some random variables",
+       fill = "")
+
+
+```
+
+
+
 ## Modulus transformation
 Like a Box-Cox transformation, but it works with negative numbers too:
-```{r, fig.width = 7}
+```{r, fig.width = 7, fig.height = 3}
 library(ggplot2)
 library(frs)
 set.seed(123)
@@ -45,7 +75,7 @@ See my blog posts on this:
 
 Yes, they're not as bad as you've been told!
 
-```{r, fig.width = 7}
+```{r, fig.width = 7, fig.height = 6}
 data(dairy)
 data(fonterra)
 # with defaults for positioning scales, but exemplifying custom colours, etc:
