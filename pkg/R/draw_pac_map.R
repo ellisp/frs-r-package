@@ -25,6 +25,7 @@
 #' @param leg_pos Legend position (in grid units i.e. 0,0 is bottom left, 1,1 is top right)
 #' @importFrom ggplot2 ggplot geom_polygon annotate geom_text theme_minimal theme geom_sf coord_sf .data
 #' @importFrom dplyr pull left_join
+#' @importFrom sf st_is_valid
 #' @export
 #' @returns A ggplot2 object
 #' @examples 
@@ -54,6 +55,13 @@ draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL,
                          idl_col = "steelblue", idl_label_size = country_label_size, 
                          leg_pos = c(0.8, 0.7), ocean_col = "lightsteelblue",
                          family = "sans"){
+  
+  # this is a bit of a hack so I can import from sf and use all of the sf methods
+  # for tidyverse objects without generating a note in the CRAN checks. There must
+  # be a better way to use the sf methods! but
+  if(!all(sf::st_is_valid(pac_map_sf))){
+    stop("pac_map_sf has in valid geometry")
+  }
   
   if(is.null(fill_df)){
     m0 <-  ggplot2::ggplot(pac_map_sf) +

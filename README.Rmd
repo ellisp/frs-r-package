@@ -25,7 +25,7 @@ draw_pac_map()
 ```
 
 ```{r}
-country_data <- tribble(~name2, ~var,
+country_data <- tibble::tribble(~name2, ~var,
                         "Cook Islands", 5,
                         "Fiji", 10,
                         "Guam", 4,
