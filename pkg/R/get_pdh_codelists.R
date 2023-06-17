@@ -9,9 +9,11 @@
 #'
 #' @param dataflow character string name of a data flow eg DF_EMPRATES
 #' @param version version number
-#' @str_url URL to get the metadata from. If left NULL then it is constructed
+#' @param str_url URL to get the metadata from. If left NULL then it is constructed
 #'   from dataflow and version.
-#' @details use at your own risk, this is a real hack and I want to improve it later.   
+#' @details use at your own risk, this is a real hack and I want to improve it later. 
+#' @export
+#' @importFrom xml2 read_xml  
 #' @examples
 #' eg1 <- get_pdh_codelists(dataflow = "DF_EMPRATES", version = "1.0")
 #' eg1

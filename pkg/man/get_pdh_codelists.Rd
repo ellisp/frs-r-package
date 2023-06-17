@@ -10,9 +10,15 @@ get_pdh_codelists(dataflow = NULL, version = "1.0", str_url = NULL)
 \item{dataflow}{character string name of a data flow eg DF_EMPRATES}
 
 \item{version}{version number}
+
+\item{str_url}{URL to get the metadata from. If left NULL then it is constructed
+from dataflow and version.}
 }
 \description{
 Get code lists from Pacific Data Hub PDH.Stat
+}
+\details{
+use at your own risk, this is a real hack and I want to improve it later.
 }
 \examples{
 eg1 <- get_pdh_codelists(dataflow = "DF_EMPRATES", version = "1.0")
