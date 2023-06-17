@@ -11,12 +11,13 @@ draw_pac_map(
   fill_col_label = fill_col,
   base_size = 11,
   xlim = c(120, 240),
-  ylim = c(-50, 50),
+  ylim = c(-40, 35),
   country_labels = TRUE,
   country_label_size = 3,
   country_label_col = "black",
   idl_col = "steelblue",
   idl_label_size = country_label_size,
+  idl_y = ylim[2] - 5,
   leg_pos = c(0.8, 0.7),
   ocean_col = "lightsteelblue",
   family = "sans"
@@ -49,6 +50,8 @@ those columns in pac_map_sf}
 \item{idl_col}{Colour to use for the International date line}
 
 \item{idl_label_size}{Size of the International date line label,}
+
+\item{idl_y}{latitude at which to add the label 'International Date Line'}
 
 \item{leg_pos}{Legend position (in grid units i.e. 0,0 is bottom left, 1,1 is top right)}
 

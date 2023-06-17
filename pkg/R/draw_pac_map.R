@@ -21,6 +21,7 @@
 #' @param idl_col Colour to use for the International date line
 #' @param idl_label_size Size of the International date line label,
 #' @param ocean_col Colour to draw the ocean
+#' @param idl_y latitude at which to add the label 'International Date Line'
 #' @param family Font family
 #' @param leg_pos Legend position (in grid units i.e. 0,0 is bottom left, 1,1 is top right)
 #' @importFrom ggplot2 ggplot geom_polygon annotate geom_text theme_minimal theme geom_sf coord_sf .data
@@ -46,14 +47,21 @@
 #'   scale_fill_viridis_c() +
 #'   labs(title = "Some random variables",
 #'   fill = "")
-draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL, 
+draw_pac_map <- function(fill_df = NULL, 
+                         join_col = "geo_pict", 
+                         fill_col = NULL, 
                          fill_col_label = fill_col,
                          base_size = 11,
-                         xlim = c(120, 240), ylim = c(-50, 50),
+                         xlim = c(120, 240), 
+                         ylim = c(-40, 35),
                          country_labels = TRUE,
-                         country_label_size = 3, country_label_col = "black",
-                         idl_col = "steelblue", idl_label_size = country_label_size, 
-                         leg_pos = c(0.8, 0.7), ocean_col = "lightsteelblue",
+                         country_label_size = 3, 
+                         country_label_col = "black",
+                         idl_col = "steelblue", 
+                         idl_label_size = country_label_size, 
+                         idl_y = ylim[2] - 5,
+                         leg_pos = c(0.8, 0.7), 
+                         ocean_col = "lightsteelblue",
                          family = "sans"){
   
   # this is a bit of a hack so I can import from sf and use all of the sf methods
@@ -87,7 +95,7 @@ draw_pac_map <- function(fill_df = NULL, join_col = "geo_pict", fill_col = NULL,
                  fill = "white",
                  alpha = 0.8) +
     ggplot2::geom_sf(data = frs::international_date_line_sf, colour = idl_col, linetype = 1, alpha = 0.5) +
-    annotate("text", x = 182, y = 38, label = "International date line", 
+    annotate("text", x = 182, y = idl_y, label = "International date line", 
              colour = idl_col, hjust = 0, family = family, size = idl_label_size) 
   
   if(country_labels){
